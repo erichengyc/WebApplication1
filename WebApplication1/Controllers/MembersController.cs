@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class CoachesController : Controller
+    public class MembersController : Controller
     {
         private readonly tennisContext _context;
-        
-        public CoachesController(tennisContext context)
+
+        public MembersController(tennisContext context)
         {
             _context = context;
         }
 
-        // GET: Coaches
+        // GET: Members
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Coach.ToListAsync());
+            return View(await _context.Member.ToListAsync());
         }
 
-        // GET: Coaches/Details/5
+        // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var coach = await _context.Coach
-                .FirstOrDefaultAsync(m => m.CoachId == id);
-            if (coach == null)
+            var member = await _context.Member
+                .FirstOrDefaultAsync(m => m.MemberId == id);
+            if (member == null)
             {
                 return NotFound();
             }
 
-            return View(coach);
+            return View(member);
         }
 
-        // GET: Coaches/Create
+        // GET: Members/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Coaches/Create
+        // POST: Members/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CoachId,Name,Nickname,Dob,Biography")] Coach coach)
+        public async Task<IActionResult> Create([Bind("MemberId,Name,Dob,Gender")] Member member)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(coach);
+                _context.Add(member);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(coach);
+            return View(member);
         }
 
-        // GET: Coaches/Edit/5
+        // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var coach = await _context.Coach.FindAsync(id);
-            if (coach == null)
+            var member = await _context.Member.FindAsync(id);
+            if (member == null)
             {
                 return NotFound();
             }
-            return View(coach);
+            return View(member);
         }
 
-        // POST: Coaches/Edit/5
+        // POST: Members/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CoachId,Name,Nickname,Dob,Biography")] Coach coach)
+        public async Task<IActionResult> Edit(int id, [Bind("MemberId,Name,Dob,Gender")] Member member)
         {
-            if (id != coach.CoachId)
+            if (id != member.MemberId)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace WebApplication1.Controllers
             {
                 try
                 {
-                    _context.Update(coach);
+                    _context.Update(member);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CoachExists(coach.CoachId))
+                    if (!MemberExists(member.MemberId))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(coach);
+            return View(member);
         }
 
-        // GET: Coaches/Delete/5
+        // GET: Members/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var coach = await _context.Coach
-                .FirstOrDefaultAsync(m => m.CoachId == id);
-            if (coach == null)
+            var member = await _context.Member
+                .FirstOrDefaultAsync(m => m.MemberId == id);
+            if (member == null)
             {
                 return NotFound();
             }
 
-            return View(coach);
+            return View(member);
         }
 
-        // POST: Coaches/Delete/5
+        // POST: Members/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var coach = await _context.Coach.FindAsync(id);
-            _context.Coach.Remove(coach);
+            var member = await _context.Member.FindAsync(id);
+            _context.Member.Remove(member);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CoachExists(int id)
+        private bool MemberExists(int id)
         {
-            return _context.Coach.Any(e => e.CoachId == id);
+            return _context.Member.Any(e => e.MemberId == id);
         }
     }
 }

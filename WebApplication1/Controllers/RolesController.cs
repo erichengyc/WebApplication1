@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class CoachesController : Controller
+    public class RolesController : Controller
     {
         private readonly tennisContext _context;
-        
-        public CoachesController(tennisContext context)
+
+        public RolesController(tennisContext context)
         {
             _context = context;
         }
 
-        // GET: Coaches
+        // GET: Roles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Coach.ToListAsync());
+            return View(await _context.Role_1.ToListAsync());
         }
 
-        // GET: Coaches/Details/5
+        // GET: Roles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var coach = await _context.Coach
-                .FirstOrDefaultAsync(m => m.CoachId == id);
-            if (coach == null)
+            var role = await _context.Role_1
+                .FirstOrDefaultAsync(m => m.RoleId == id);
+            if (role == null)
             {
                 return NotFound();
             }
 
-            return View(coach);
+            return View(role);
         }
 
-        // GET: Coaches/Create
+        // GET: Roles/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Coaches/Create
+        // POST: Roles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CoachId,Name,Nickname,Dob,Biography")] Coach coach)
+        public async Task<IActionResult> Create([Bind("RoleId,RoleType")] Role role)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(coach);
+                _context.Add(role);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(coach);
+            return View(role);
         }
 
-        // GET: Coaches/Edit/5
+        // GET: Roles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var coach = await _context.Coach.FindAsync(id);
-            if (coach == null)
+            var role = await _context.Role_1.FindAsync(id);
+            if (role == null)
             {
                 return NotFound();
             }
-            return View(coach);
+            return View(role);
         }
 
-        // POST: Coaches/Edit/5
+        // POST: Roles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CoachId,Name,Nickname,Dob,Biography")] Coach coach)
+        public async Task<IActionResult> Edit(int id, [Bind("RoleId,RoleType")] Role role)
         {
-            if (id != coach.CoachId)
+            if (id != role.RoleId)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace WebApplication1.Controllers
             {
                 try
                 {
-                    _context.Update(coach);
+                    _context.Update(role);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CoachExists(coach.CoachId))
+                    if (!RoleExists(role.RoleId))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace WebApplication1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(coach);
+            return View(role);
         }
 
-        // GET: Coaches/Delete/5
+        // GET: Roles/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var coach = await _context.Coach
-                .FirstOrDefaultAsync(m => m.CoachId == id);
-            if (coach == null)
+            var role = await _context.Role_1
+                .FirstOrDefaultAsync(m => m.RoleId == id);
+            if (role == null)
             {
                 return NotFound();
             }
 
-            return View(coach);
+            return View(role);
         }
 
-        // POST: Coaches/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var coach = await _context.Coach.FindAsync(id);
-            _context.Coach.Remove(coach);
+            var role = await _context.Role_1.FindAsync(id);
+            _context.Role_1.Remove(role);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CoachExists(int id)
+        private bool RoleExists(int id)
         {
-            return _context.Coach.Any(e => e.CoachId == id);
+            return _context.Role_1.Any(e => e.RoleId == id);
         }
     }
 }
