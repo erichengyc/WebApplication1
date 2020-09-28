@@ -20,14 +20,14 @@ namespace WebApplication1.Models
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<Member> Member { get; set; }
         public virtual DbSet<Schedule> Schedule { get; set; }
-        public virtual DbSet<Schedule> Role { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AFTS;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WebApplication1;Trusted_Connection=True;MultipleActiveResultSets=true");
             }
         }
 
@@ -65,7 +65,6 @@ namespace WebApplication1.Models
 
                 entity.Property(e => e.EventId).HasColumnName("event_id");
 
-                entity.Property(e => e.Coach).HasColumnName("coach");
 
                 entity.Property(e => e.Date)
                     .HasColumnName("date")
@@ -115,9 +114,6 @@ namespace WebApplication1.Models
 
                 entity.Property(e => e.ScheduleId).HasColumnName("schedule_id");
 
-                entity.Property(e => e.EventId).HasColumnName("event_id");
-
-                entity.Property(e => e.MemberId).HasColumnName("member_id");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -131,6 +127,6 @@ namespace WebApplication1.Models
             });
         }
 
-        public DbSet<WebApplication1.Models.Role> Role_1 { get; set; }
+
     }
 }
