@@ -27,7 +27,7 @@ namespace WebApplication1.Models
             if (!optionsBuilder.IsConfigured)
             {
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=WebApplication1;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AFTS;Trusted_Connection=True;MultipleActiveResultSets=true");
             }
         }
 
@@ -95,7 +95,7 @@ namespace WebApplication1.Models
                 entity.Property(e => e.Gender)
                     .IsRequired()
                     .HasColumnName("gender")
-                    .HasMaxLength(1)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
@@ -122,7 +122,9 @@ namespace WebApplication1.Models
 
                 entity.Property(e => e.RoleId).HasColumnName("role_id");
 
-                entity.Property(e => e.RoleType).HasColumnName("role_type");
+                entity.Property(e => e.RoleType).HasColumnName("role_type")
+                .HasDefaultValue("Member");
+
 
             });
         }
