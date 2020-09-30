@@ -14,5 +14,8 @@ namespace WebApplication1.Models
         public Role RoleType { get; set; }
         public string Gender { get; set; }
         public string Biography { get; set; }
+
+        public ICollection<Event> Events { get; set; }
+        public ICollection<Schedule> Schedules { get; set; }
     }
 }

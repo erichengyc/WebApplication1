@@ -8,7 +8,7 @@ namespace WebApplication1.Models
     public partial class Schedule
     {
         public int ScheduleId { get; set; }
-        public Event EventId { get; set; }
-        public Member MemberId { get; set; }
+        public Event Event { get; set; }
+        public Member Member { get; set; }
     }
 }

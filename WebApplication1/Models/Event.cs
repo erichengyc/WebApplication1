@@ -10,8 +10,8 @@ namespace WebApplication1.Models
         public int EventId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Member MemberId { get; set; }
+        public Member Member { get; set; }
         public DateTime Date { get; set; }
-
+        public ICollection<Schedule> Schedules { get; set; }
     }
 }
