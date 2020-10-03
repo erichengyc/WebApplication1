@@ -3,50 +3,10 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*<div class="row">
-            <div class="col-md-12">
-                <h2>Registered Users</h2>
-                @if (Model.Any())
-                {
-                    <table class="table">
-                        <tr>
-                            <th>Name</th>
-                            <th>Nickname</th>
-                            <th>Email</th>
-                            <th>Password</th>
-                            <th>Gender</th>
-                            <th>DOB</th>
-                            <th>Biography</th>
-                            <th>RoleId</th>
-                        </tr>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@item.Name</td>
-                                <td>@item.Nickname</td>
-                                <td>@item.Email</td>
-                                <td>@item.Password</td>
-                                <td>@item.Gender</td>
-                                <td>@item.Dob</td>
-                                <td>@item.Biography</td>
-                                <td>@item.RoleId</td>
-                            </tr>
-                        }
-                    </table>
-
-                }
-                else
-                {
-                    <p>There are no registered members.</p>
-
-                }
-            </div>
-    </div>*@
-
 <div class="banner">
     <h1 class="banner-head">
-        Simple Pricing.<br>
-        Try before you buy.
+        Anyone For Tennis Centre<br>
+        Where Roger Federer is a coach
     </h1>
 </div>
 
@@ -55,6 +15,8 @@
         <div class="l-box">
             <h3 class="information-head">Account</h3>
             <p>
+                <button onclick="location.href='/Home/Login';" class="button-secondary pure-button">Login</button>
+                <br><br />
                 <button onclick="location.href='/Home/Register';" class="button-secondary pure-button">Register</button>
             </p>
         </div>
