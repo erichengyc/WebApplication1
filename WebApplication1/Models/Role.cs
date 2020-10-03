@@ -10,6 +10,6 @@ namespace WebApplication1.Models
         public int RoleId { get; set; }
         public string RoleType { get; set; }
 
-        public Member Member { get; set; }
+        public ICollection<Member> Members { get; set; }
     }
 }

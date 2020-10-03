@@ -95,7 +95,7 @@ namespace WebApplication1.Models
                 entity.Property(e => e.Gender)
                     .IsRequired()
                     .HasColumnName("gender")
-                    .HasMaxLength(200)
+                    .HasMaxLength(1)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
@@ -103,6 +103,9 @@ namespace WebApplication1.Models
                     .HasColumnName("name")
                     .HasMaxLength(200)
                     .IsUnicode(false);
+
+                entity.Property(e => e.RoleId).HasColumnName("role_id")
+                .HasDefaultValue(3);
 
 
 
