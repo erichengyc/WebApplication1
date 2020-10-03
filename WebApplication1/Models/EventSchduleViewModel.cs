@@ -9,10 +9,10 @@ namespace WebApplication1.Models
     {
         public int scheduleId;
         public string eventName;
-        public string member;
         public string coach;
 
         public List<Schedule> Schedules;
+        public List<Schedule> MemberSchedule;
         public List<Event> Events;
         public List<Member> Members;
     }

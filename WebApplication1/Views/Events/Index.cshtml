@@ -7,12 +7,11 @@
 
 @ViewBag.Session
 
-
+<h2>All Events</h2>
 <div class="pure-g">
     @if (Context.Session.GetString("RoleId") == "3" || Context.Session.GetString("RoleId") == "2")
     {
         <div class="pure-u-1 pure-u-md-1">
-            <h1>Index</h1>
 
             <table class="pure-table pure-table-horizontal">
                 <thead>
@@ -48,7 +47,6 @@
     {
 
         <div class="pure-u-1 pure-u-md-1">
-            <h2>Index</h2>
 
             <p>
                 <a asp-action="Create">Create New</a>

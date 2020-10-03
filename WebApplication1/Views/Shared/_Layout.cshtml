@@ -53,18 +53,17 @@
 
                @if (Context.Session.GetInt32("RoleId") == 3)
                {
+                   <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link"><i class="fa fa-handshake"></i> Coaches</a></li>
 
-                   <li class="pure-menu-item"><i class="fa fa-handshake"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link">Coaches</a></li>
-                   <li class="pure-menu-item"><i class="fa fa-edit"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link">Schedules</a></li>
-                   <li class="pure-menu-item"><i class="fa fa-calendar-alt"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link">Events</a></li>
+                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> Schedules</a></li>
+
+                   <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> Events</a></li>
+
+
 
                    <ul class="pure-menu-list">
-                       <li class="pure-menu-item"><i class="fa fa-user"></i></li>
                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                           <a href="#" id="menuLink1" class="pure-menu-link">Account</a>
+                           <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
                            <ul class="pure-menu-children">
                                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Options</a></li>
                                <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
@@ -74,15 +73,15 @@
                }
                else if (Context.Session.GetString("RoleId") == "2")
                {
-                   <li class="pure-menu-item"><i class="fa fa-edit"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link">Schedules</a></li>
-                   <li class="pure-menu-item"><i class="fa fa-calendar-alt"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link">Events</a></li>
+                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> Schedules</a></li>
+
+                   <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> Events</a></li>
+
 
                    <ul class="pure-menu-list">
                        <li class="pure-menu-item"><i class="fa fa-user"></i></li>
                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                           <a href="#" id="menuLink1" class="pure-menu-link">Account</a>
+                           <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
                            <ul class="pure-menu-children">
                                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Options</a></li>
                                <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
@@ -95,21 +94,19 @@
                else if (Context.Session.GetString("RoleId") == "1")
                {
 
-                   <li class="pure-menu-item"><a asp-controller="Roles" asp-action="Index" class="pure-menu-link">Roles</a></li>
-                   <li class="pure-menu-item"><i class="fa fa-user-circle"></i></li>
-                   <li class="pure-menu-item"><i class="fa fa-calendar-alt"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link">Events</a></li>
-                   <li class="pure-menu-item"><i class="fa fa-handshake"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link">Coaches</a></li>
-                   <li class="pure-menu-item"><i class="fa fa-users"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Members" asp-action="Index" class="pure-menu-link">Members</a></li>
-                   <li class="pure-menu-item"><i class="fa fa-edit"></i></li>
-                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link">Schedules</a></li>
+                   <li class="pure-menu-item"><a asp-controller="Roles" asp-action="Index" class="pure-menu-link"><i class="fa fa-user-circle"></i> Roles</a></li>
+
+                   <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> Events</a></li>
+
+                   <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link"><i class="fa fa-handshake"></i> Coaches</a></li>
+
+                   <li class="pure-menu-item"><a asp-controller="Members" asp-action="Index" class="pure-menu-link"><i class="fa fa-users"></i> Members</a></li>
+
+                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> Schedules</a></li>
 
                    <ul class="pure-menu-list">
-                       <li class="pure-menu-item"><i class="fa fa-user"></i></li>
                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-                           <a href="#" id="menuLink1" class="pure-menu-link">Account</a>
+                           <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
                            <ul class="pure-menu-children">
                                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Options</a></li>
                                <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>

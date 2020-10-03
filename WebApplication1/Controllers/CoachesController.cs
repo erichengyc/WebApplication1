@@ -6,6 +6,7 @@ using WebApplication1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApplication1.Controllers
 {
@@ -21,29 +22,46 @@ namespace WebApplication1.Controllers
         // GET: Coaches
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Coach.ToListAsync());
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null)
+            {
+                return View(await _context.Member.Include(roles => roles.Role).Where(c => c.RoleId == 2).ToListAsync());
+            }
+            return RedirectToAction("Login", "Home");
         }
 
         // GET: Coaches/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var coach = await _context.Coach
-                .FirstOrDefaultAsync(m => m.CoachId == id);
-            if (coach == null)
+
+            if (MemberId != null)
             {
-                return NotFound();
+                var coach = await _context.Member
+                                            .FirstOrDefaultAsync(m => m.MemberId == id);
+                if (coach == null)
+                {
+                    return NotFound();
+                }
+
+
+                return View(coach);
             }
 
-            return View(coach);
+            return RedirectToAction("Login", "Home");
         }
 
-        // GET: Coaches/Create
-        public IActionResult Create()
+            // GET: Coaches/Create
+            public IActionResult Create()
         {
             return View();
         }
@@ -67,27 +85,35 @@ namespace WebApplication1.Controllers
         // GET: Coaches/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var coach = await _context.Coach.FindAsync(id);
-            if (coach == null)
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+
+                var coach = await _context.Coach.FindAsync(id);
+                if (coach == null)
+                {
+                    return NotFound();
+                }
+                return View(coach);
             }
-            return View(coach);
+            return RedirectToAction("Login", "Home");
         }
 
-        // POST: Coaches/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+            // POST: Coaches/Edit/5
+            // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+            // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CoachId,Name,Nickname,Dob,Biography")] Coach coach)
+        public async Task<IActionResult> Edit(int id, [Bind("MemberId,Name,Nickname,Email,Password,Dob,Gender,Biography,RoleId")] Member coach)
         {
-            if (id != coach.CoachId)
+            if (id != coach.MemberId)
             {
                 return NotFound();
             }
@@ -101,7 +127,7 @@ namespace WebApplication1.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CoachExists(coach.CoachId))
+                    if (!CoachExists(coach.MemberId))
                     {
                         return NotFound();
                     }
@@ -118,35 +144,41 @@ namespace WebApplication1.Controllers
         // GET: Coaches/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
             if (id == null)
             {
                 return NotFound();
             }
-
-            var coach = await _context.Coach
-                .FirstOrDefaultAsync(m => m.CoachId == id);
-            if (coach == null)
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
-            }
 
-            return View(coach);
+                var coach = await _context.Member
+                    .FirstOrDefaultAsync(m => m.MemberId == id);
+                if (coach == null)
+                {
+                    return NotFound();
+                }
+
+                return View(coach);
+            }
+            return RedirectToAction("Login", "Home");
         }
 
-        // POST: Coaches/Delete/5
-        [HttpPost, ActionName("Delete")]
+            // POST: Coaches/Delete/5
+            [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var coach = await _context.Coach.FindAsync(id);
-            _context.Coach.Remove(coach);
+            var coach = await _context.Member.FindAsync(id);
+            _context.Member.Remove(coach);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CoachExists(int id)
         {
-            return _context.Coach.Any(e => e.CoachId == id);
+            return _context.Member.Any(e => e.MemberId == id);
         }
     }
 }

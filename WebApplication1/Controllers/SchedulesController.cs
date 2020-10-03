@@ -35,18 +35,26 @@ namespace WebApplication1.Controllers
 
                 var coachschedule = _context.Schedule.Where(s => s.EventId == s.Event.EventId && s.Event.MemberId == MemberId).Include(e => e.Event).ToList();
 
+                var schdules = from s in _context.Schedule
+                               select s;
+
+                var membersInEvent = from m in _context.Member
+                                     join s in _context.Schedule on m.MemberId equals s.MemberId
+                                     join e in _context.Event on s.EventId equals e.EventId
+                                     select e;
 
                 var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
                 {
                     Schedules = coachschedule,
-                    Events = coachEvents
+                    Events = membersInEvent.ToList()
+
 
                 });
 
                 var eVM2 = new EventSchduleViewModel
                 {
                     Schedules = coachschedule,
-                    Events = coachEvents
+                    Events = membersInEvent.ToList()
 
                 };
 
@@ -65,34 +73,36 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var MemberId = HttpContext.Session.GetString("MemberId");
+            var MemberIdString = HttpContext.Session.GetString("MemberId");
             var RoleIdString = HttpContext.Session.GetString("RoleId");
 
+            bool v = Int32.TryParse(MemberIdString, out int MemberId);
             Int32.TryParse(RoleIdString, out int RoleId);
 
-            if (MemberId != null)
+            if (MemberIdString != null)
             {
-                var schedule = _context.Schedule.FirstOrDefault(s => s.ScheduleId == id);
 
-                if (schedule == null)
-                {
-                    return NotFound();
-                }
 
-                var coachEvents = _context.Event.Where(c => c.MemberId == RoleId).ToList();
 
-                var members = _context.Member.Where(c => c.MemberId == schedule.MemberId).ToList();
+                var coachEvents = from m in _context.Member
+                                  join s in _context.Schedule on m.MemberId equals s.MemberId
+                                  join e in _context.Event on s.EventId equals e.EventId
+                                  where s.Event.MemberId == MemberId
+                                  select e;
+
+
+
 
                 var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
                 {
-                    Events = coachEvents,
-                    Members = members
+                    Events = coachEvents.ToList()
+
                 });
 
                 var eVM2 = new EventSchduleViewModel
                 {
-                    Events = coachEvents,
-                    Members = members
+
+                    Events = coachEvents.ToList()
 
                 };
 
