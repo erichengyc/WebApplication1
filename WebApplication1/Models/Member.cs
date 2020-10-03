@@ -38,6 +38,7 @@ namespace WebApplication1.Models
 
         public ICollection<Event> Events { get; set; }
         public ICollection<Schedule> Schedules { get; set; }
+        //public ICollection<EventSchduleViewModel> EventSchduleViewModels { get; set; }
 
     }
 }

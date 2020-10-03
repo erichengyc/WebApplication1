@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AFTS</title>
 
+    <!--DO NOT DELETE THE LINE BELOW OR ELSE WEBSITE WILL NOT FUNCTION PROPERLY-->
+    <partial name="_CookieConsentPartial" />
 
     <environment include="Development">
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <!--[if lte IE 8]>
             <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
         <![endif]-->
@@ -46,26 +48,43 @@
 <body>
 
     <div class="pure-menu pure-menu-horizontal">
-        <a <a asp-controller="Home" asp-action="Index" class="pure-menu-heading">Your Logo</a>
+        <a <a asp-controller="Home" asp-action="Index" class="pure-menu-heading">Web Schedule</a>
            <ul class="pure-menu-list">
-               <li class="pure-menu-item"><a asp-controller="Home" asp-action="Index" class="pure-menu-link">Home</a></li>
-               <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link">Coaches</a></li>
-               <li class="pure-menu-item"><a asp-controller="Roles" asp-action="Index" class="pure-menu-link">Roles</a></li>
-               <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link">Events</a></li>
-               <li class="pure-menu-item"><a asp-controller="Members" asp-action="Index" class="pure-menu-link">Members</a></li>
-               <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link">Schedules</a></li>
 
-               @if (Context.Session.GetString("MemberId") != null)
+               @if (Context.Session.GetInt32("RoleId") == 3)
                {
-                   <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Logout</a></li>
+
+                   <li class="pure-menu-item"><i class="fa fa-handshake"></i></li>
+                   <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link">Coaches</a></li>
+
+                   <li class="pure-menu-item"><i class="fa fa-calendar-alt"></i></li>
+                   <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link">Events</a></li>
+
+                   <li class="pure-menu-item"><i class="fa fa-users"></i></li>
+                   <li class="pure-menu-item"><a asp-controller="Members" asp-action="Index" class="pure-menu-link">Members</a></li>
+                   <li class="pure-menu-item"><i class="fa fa-edit"></i></li>
+                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link">Schedules</a></li>
+
+                   <ul class="pure-menu-list">
+                       <li class="pure-menu-item"><i class="fa fa-user"></i></li>
+                       <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                           <a href="#" id="menuLink1" class="pure-menu-link">Account</a>
+                           <ul class="pure-menu-children">
+                               <li class="pure-menu-item"><a href="#" class="pure-menu-link">Options</a></li>
+                               <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
+                           </ul>
+                       </li>
+                   </ul>
                }
                else
                {
+                   <li class="pure-menu-item"><i class="fa fa-users"></i></li>
+                   <li class="pure-menu-item"><a asp-controller="Roles" asp-action="Index" class="pure-menu-link">Roles</a></li>
+                   <li class="pure-menu-item"><i class="fa fa-user-circle"></i></li>
                    <li class="pure-menu-item"><a asp-controller="Home" asp-action="Register" class="pure-menu-link">Register</a></li>
+                   <li class="pure-menu-item"><i class="fa fa-user-circle"></i></li>
                    <li class="pure-menu-item"><a asp-controller="Home" asp-action="Login" class="pure-menu-link">Login</a></li>
-
                }
-
 
            </ul>
     </div>
@@ -76,8 +95,24 @@
 
 
     <div class="footer l-box">
+        <p>Hello this webpage was developed as a group assesment for HIT337, this group consisted of Jason Mu, Andrew Thai, Quang Tran, Rayven Nguyen.</p>
+
+        <br />
         <p>
-            <a href="#">Try now</a> for 14 days. No credit card required. Header image courtesy of <a href='http://unsplash.com/'>Unsplash</a>.
+            Disclaimer for AFTS If you require any more information or have any questions about our site’s disclaimer,
+            please feel free to contact us by email at AFTS.Support@cdu.edu.au. Disclaimers for AFTS.Spinetail All the information on
+            this website is published in good faith and for general information purpose only. AFTS.Spinetail does not make any warranties
+            about the completeness, reliability and accuracy of this information. Any action you take upon the information you find on this
+            website (AFTS.Spinetail), is strictly at your own risk. AFTS.Spinetail will not be liable for any losses and/or damages in
+            connection with the use of our website. From our website, you can visit other websites by following hyperlinks to such external sites.
+            While we strive to provide only quality links to useful and ethical websites, we have no control over the content and nature of these sites.
+            These links to other websites do not imply a recommendation for all the content found on these sites. Site owners and content may change
+            without notice and may occur before we have the opportunity to remove a link which may have gone ‘bad’. Please be also aware that when you
+            leave our website, other sites may have different privacy policies and terms which are beyond our control. Please be sure to check the
+            Privacy Policies of these sites as well as their “Terms of Service” before engaging in any business or uploading any information.
+            Consent By using our website, you hereby consent to our disclaimer and agree to its terms. Update Should we update, amend or make
+            any changes to this document, those changes will be prominently posted here. This Disclaimer was created at disclaimergenerator.net.
+            This Webpage was written and designed by Rayven, Quang, Jason, Andrew 2018. Copyright
         </p>
     </div>
 

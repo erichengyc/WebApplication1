@@ -22,6 +22,7 @@ namespace WebApplication1.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
+            ViewBag.EnrollError = "You have already enrolled in this event.";
             return View(await _context.Event.ToListAsync());
         }
 
@@ -33,11 +34,64 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
+            var eVM = new EventSchduleViewModel()
+            {
+
+            };
+
             var @event = await _context.Event
                 .FirstOrDefaultAsync(m => m.EventId == id);
             if (@event == null)
             {
                 return NotFound();
+            }
+            return View(@event);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Details(int id, Schedule schedule)
+        {
+            var events = _context.Event;
+            var @event = events.FirstOrDefault(e => e.EventId == id);
+
+            if (ModelState.IsValid)
+            {
+
+                var members = _context.Member;
+                var schedules = _context.Schedule;
+
+                var MemberIdString = HttpContext.Session.GetString("MemberId");
+
+                Int32.TryParse(MemberIdString, out int MemberId);
+
+
+
+                var existingEnroll = await _context.Schedule.SingleOrDefaultAsync(s => s.Member.MemberId == MemberId && s.Event.EventId == id);
+
+                if (existingEnroll != null)
+                {
+                    ModelState.AddModelError("", "You have already enrolled in this event.");
+                }
+                else
+                {
+                    var member = members.FirstOrDefault(m => m.MemberId == MemberId);
+
+                    var eventSchedule = new Schedule()
+                    {
+                        Member = member,
+                        Event = @event
+
+                    };
+
+                    _context.Schedule.Add(eventSchedule);
+
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Index", "Events");
+                }
+
+
             }
 
             return View(@event);
@@ -145,13 +199,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Enroll(int id)
-        {
-            ViewBag.MemberId = HttpContext.Session.GetString("MemberId");
-            return RedirectToAction(nameof(Index));
-        }
 
         private bool EventExists(int id)
         {
