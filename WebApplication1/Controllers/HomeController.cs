@@ -84,7 +84,7 @@ namespace WebApplication1.Controllers
             {
                 HttpContext.Session.SetString("MemberId", account.MemberId.ToString());
                 HttpContext.Session.SetString("Email", account.Email);
-                HttpContext.Session.SetInt32("Role", account.RoleId);
+                HttpContext.Session.SetString("RoleId", account.RoleId.ToString());
                 return RedirectToAction("Welcome");
             }
             else
@@ -101,7 +101,7 @@ namespace WebApplication1.Controllers
             {
                 ViewBag.Email = HttpContext.Session.GetString("Email");
                 ViewBag.MemberId = HttpContext.Session.GetString("MemberId");
-                ViewBag.RoleId = HttpContext.Session.GetInt32("RoleId");
+                ViewBag.RoleId = HttpContext.Session.GetString("RoleId");
                 return View();
             }
             else
