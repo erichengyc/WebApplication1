@@ -60,19 +60,34 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult Register(Member user)
         {
-            if (ModelState.IsValid)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId == null)
             {
-                _context.Member.Add(user);
-                _context.SaveChanges();
-                ModelState.Clear();
-                ViewBag.Message = user.Email + " has successfully registered.";
+                if (ModelState.IsValid)
+                {
+                    _context.Member.Add(user);
+                    _context.SaveChanges();
+                    ModelState.Clear();
+                    ViewBag.Message = user.Email + " has successfully registered.";
+                }
+                return View();
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Login()
         {
-            return View();
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId == null)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+
         }
 
 

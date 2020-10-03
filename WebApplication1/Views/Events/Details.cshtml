@@ -71,20 +71,9 @@ else if (Context.Session.GetString("RoleId") == "2")
             </dd>
         </dl>
 
-        <a asp-action="Index">Back to List</a>
-        <a class="button-success pure-button" asp-controller="Schedule" asp-action="Details" asp-route-id="@Model.EventId">View Schedule</a>
-
-
-        <form asp-action="Details">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EventId" />
-            <div class="form-group">
-                <input type="submit" value="Enroll" class="button-success pure-button" />
-            </div>
-        </form>
     </div>
 }
-else
+else if (Context.Session.GetString("RoleId") == "1")
 {
 <div>
     <h4>Event</h4>

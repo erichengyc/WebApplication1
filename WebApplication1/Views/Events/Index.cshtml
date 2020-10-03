@@ -5,6 +5,9 @@
     ViewData["Title"] = "Index";
 }
 
+@ViewBag.Session
+
+
 <div class="pure-g">
     @if (Context.Session.GetString("RoleId") == "3" || Context.Session.GetString("RoleId") == "2")
     {
@@ -84,6 +87,5 @@
                 </tbody>
             </table>
         </div>
-        }
     }
 </div>

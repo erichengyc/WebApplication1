@@ -12,9 +12,8 @@ namespace WebApplication1.Models
         public string member;
         public string coach;
 
-        public Event Event;
-        public Member Member;
-        public Schedule Schedule;
-
+        public List<Schedule> Schedules;
+        public List<Event> Events;
+        public List<Member> Members;
     }
 }

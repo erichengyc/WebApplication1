@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,19 @@ namespace WebApplication1.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Member.ToListAsync());
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else if (RoleId == "1")
+            {
+                return View(await _context.Member.ToListAsync());
+            }
+            return RedirectToAction("Index", "Home");
+
         }
 
         // GET: Members/Details/5
@@ -32,14 +45,22 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Member
-                .FirstOrDefaultAsync(m => m.MemberId == id);
-            if (member == null)
-            {
-                return NotFound();
-            }
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
 
-            return View(member);
+            if (MemberId != null && RoleId == "1")
+            {
+                    var member = await _context.Member.FirstOrDefaultAsync(m => m.MemberId == id);
+                    if (member == null)
+                {
+                    return NotFound();
+                }
+
+                return View(member);
+            }
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // GET: Members/Create
@@ -55,13 +76,14 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MemberId,Name,Dob,Gender")] Member member)
         {
-            if (ModelState.IsValid)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                _context.Add(member);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View(member);
             }
-            return View(member);
+            return RedirectToAction("Login", "Home");
         }
 
         // GET: Members/Edit/5
@@ -72,18 +94,25 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Member.FindAsync(id);
-            if (member == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var member = await _context.Member.FindAsync(id);
+                if (member == null)
+                {
+                    return NotFound();
+                }
+                return View(member);
             }
-            return View(member);
+            return RedirectToAction("Login", "Home");
         }
 
-        // POST: Members/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+            // POST: Members/Edit/5
+            // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+            // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MemberId,Name,Dob,Gender")] Member member)
         {
@@ -123,14 +152,21 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Member
-                .FirstOrDefaultAsync(m => m.MemberId == id);
-            if (member == null)
-            {
-                return NotFound();
-            }
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
 
-            return View(member);
+            if (MemberId != null && RoleId == "1")
+            {
+                var member = await _context.Member
+                .FirstOrDefaultAsync(m => m.MemberId == id);
+                if (member == null)
+                {
+                    return NotFound();
+                }
+
+                return View(member);
+            }
+            return RedirectToAction("Login", "Home");
         }
 
         // POST: Members/Delete/5

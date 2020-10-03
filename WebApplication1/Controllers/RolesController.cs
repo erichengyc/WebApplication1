@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,14 @@ namespace WebApplication1.Controllers
         // GET: Roles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Role.ToListAsync());
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
+            {
+                return View(await _context.Role.ToListAsync());
+            }
+            return RedirectToAction("Login", "Home");
         }
 
         // GET: Roles/Details/5
@@ -32,25 +40,39 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var role = await _context.Role
-                .FirstOrDefaultAsync(m => m.RoleId == id);
-            if (role == null)
-            {
-                return NotFound();
-            }
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
 
-            return View(role);
+            if (MemberId != null && RoleId == "1")
+            {
+                var role = await _context.Role
+                .FirstOrDefaultAsync(m => m.RoleId == id);
+                if (role == null)
+                {
+                    return NotFound();
+                }
+
+                return View(role);
+            }
+            return RedirectToAction("Login", "Home");
         }
 
         // GET: Roles/Create
         public IActionResult Create()
         {
-            return View();
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
+            {
+                return View();
+            }
+            return RedirectToAction("Login", "Home");
         }
 
-        // POST: Roles/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+            // POST: Roles/Create
+            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+            // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RoleId,RoleType")] Role role)
@@ -72,12 +94,24 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var role = await _context.Role.FindAsync(id);
-            if (role == null)
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
             {
-                return NotFound();
+                var role = await _context.Role
+                    .FirstOrDefaultAsync(m => m.RoleId == id);
+                if (role == null)
+                {
+                    return NotFound();
+                }
+
             }
-            return View(role);
+
+
+            return RedirectToAction("Login", "Home");
+
+
         }
 
         // POST: Roles/Edit/5
@@ -123,18 +157,26 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var role = await _context.Role
-                .FirstOrDefaultAsync(m => m.RoleId == id);
-            if (role == null)
-            {
-                return NotFound();
-            }
 
-            return View(role);
+            var MemberId = HttpContext.Session.GetString("MemberId");
+            var RoleId = HttpContext.Session.GetString("RoleId");
+
+            if (MemberId != null && RoleId == "1")
+            {
+                var role = await _context.Role
+                .FirstOrDefaultAsync(m => m.RoleId == id);
+                if (role == null)
+                {
+                    return NotFound();
+                }
+
+                return View(role);
+            }
+            return RedirectToAction("Login", "Home");
         }
 
-        // POST: Roles/Delete/5
-        [HttpPost, ActionName("Delete")]
+            // POST: Roles/Delete/5
+            [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

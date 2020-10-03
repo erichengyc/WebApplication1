@@ -1,29 +1,54 @@
-﻿@model IEnumerable<WebApplication1.Models.Schedule>
+﻿@model EventSchduleViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2>My Events</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="pure-table pure-table-horizontal">
     <thead>
         <tr>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.eventName)</th>
+            <th>@Html.DisplayNameFor(model => model.coach)</th>
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model.Events)
+        {
+
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Member.Name)</td>
+                <td>
+                    <a class="button-success pure-button" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<h2>My Schedule</h2>
+
+<table class="pure-table pure-table-horizontal">
+    <thead>
         <tr>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ScheduleId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ScheduleId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ScheduleId">Delete</a>
-            </td>
+            <th>@Html.DisplayNameFor(model => model.scheduleId)</th>
+
         </tr>
-}
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Schedules)
+        {
+
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ScheduleId)</td>
+                <td>
+                    <a class="button-success pure-button" asp-action="Details" asp-route-id="@item.ScheduleId">View Schedule</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
