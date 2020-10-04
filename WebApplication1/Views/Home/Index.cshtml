@@ -1,9 +1,9 @@
-﻿@model IEnumerable<WebApplication1.Models.Member>
+﻿@model AFTS.Models.Member
 @using Microsoft.AspNetCore.Http
-
 @{
     ViewData["Title"] = "Home Page";
 }
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 <div class="banner">
     <h1 class="banner-head">
@@ -21,11 +21,85 @@
         <div class="pure-u-1 pure-u-md-1-2">
             <div class="l-box">
                 <h3 class="information-head">Account</h3>
+
+
                 <p>
+                    <!-- Normal log in -->
                     <button onclick="location.href='/Home/Login';" class="button-secondary pure-button">Login</button>
-                    <br><br />
+                    <!-- Pop up for log in -->
+                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="button-secondary pure-button">Login Popup</button>
+
+                    <div id="modal-wrapper" class="modal">
+
+                        <form class="modal-content animate" asp-controller="Home" asp-action="Login" method="post">
+
+                            <div class="imgcontainer">
+                                <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                                <img src="~/images/User Image.png" alt="Image goes here" class="avatar">
+                                <h1 style="text-align:center">AFTS Schedule Log In</h1>
+                            </div>
+
+                            <!-- Pop up user -->
+                            <div class="container" asp-controller="Home" asp-action="Login" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Email" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="Email" class="form-control" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Pop up password -->
+                                <div class="form-group">
+                                    <label asp-for="Password" class="col-md-2 control-label"></label>
+                                    <div class="col-md-10">
+                                        <input asp-for="Password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-default">Login</button>
+                                <input type="checkbox" style="margin:26px 30px;"> Remember me
+                                <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- Pop up for Log in -->
+                    <!-- Normal Register -->
                     <button onclick="location.href='/Home/Register';" class="button-secondary pure-button">Register</button>
+
+                    <!-- Pop up for Register -->
+                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="button-secondary pure-button">Register Popup</button>
+
+                    <div id="modal-wrapper" class="modal">
+
+                        <form class="modal-content animate" asp-controller="Home" asp-action="Login" method="post">
+
+                            <div class="imgcontainer2">
+                                <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                                <img src="~/images/User Image.png" alt="Image goes here" class="avatar">
+                                <h1 style="text-align:center">AFTS Schedule Register</h1>
+                            </div>
+
+
+                            <div class="container" asp-controller="Home" asp-action="Login" method="post">
+
+                                <input type="text" placeholder="Enter Username" name="uname">
+                                <input type="password" placeholder="Enter Password" name="psw">
+                                <button type="submit" class="btn btn-default">Login</button>
+                                <input type="checkbox" style="margin:26px 30px;"> Remember me
+                                <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <!-- End of Pop up for Register -->
+
                 </p>
+
             </div>
         </div>
         <div class="pure-u-1 pure-u-md-1-2">
@@ -38,44 +112,45 @@
                     <li class="pure-menu-item"><i class="fa fa-shield-alt"></i></li>
                     <a href="#" class="pure-menu-link pure-menu-heading">Forgotten Password</a>
                 </p>
+
             </div>
-        </div> <!-- end pricing-tables -->
+        </div>
     }
 
-        <div class="information pure-g">
-            <div class="pure-u-1 pure-u-md-1-2">
-                <div class="l-box">
-                    <h3 class="information-head">Get started today</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                    </p>
-                </div>
+    <div class="information pure-g">
+        <div class="pure-u-1 pure-u-md-1-2">
+            <div class="l-box">
+                <h3 class="information-head">Get started today</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                </p>
             </div>
-            <div class="pure-u-1 pure-u-md-1-2">
-                <div class="l-box">
-                    <h3 class="information-head">Pay monthly or annually</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                    </p>
-                </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+            <div class="l-box">
+                <h3 class="information-head">Pay monthly or annually</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
+                </p>
             </div>
-            <div class="pure-u-1 pure-u-md-1-2">
-                <div class="l-box">
-                    <h3 class="information-head">24/7 customer support</h3>
-                    <p>
-                        Test dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+            <div class="l-box">
+                <h3 class="information-head">24/7 customer support</h3>
+                <p>
+                    Test dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
             </div>
-            <div class="pure-u-1 pure-u-md-1-2">
-                <div class="l-box">
-                    <h3 class="information-head">Cancel your plan anytime</h3>
-                    <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </div>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+            <div class="l-box">
+                <h3 class="information-head">Cancel your plan anytime</h3>
+                <p>
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
             </div>
-        </div> <!-- end information -->
-    </div> <!-- end l-content -->
+        </div>
+    </div> <!-- end information -->
+</div> <!-- end l-content -->

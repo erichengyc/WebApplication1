@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApplication1.Controllers
 {
@@ -20,46 +20,57 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Schedules
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+
             var MemberIdString = HttpContext.Session.GetString("MemberId");
             var RoleIdString = HttpContext.Session.GetString("RoleId");
 
             Int32.TryParse(MemberIdString, out int MemberId);
             Int32.TryParse(RoleIdString, out int RoleId);
 
-            if (MemberIdString != null)
+            if (MemberIdString != null && MemberId == 1)
             {
-
-                var coachEvents = _context.Event.Where(c => c.MemberId == MemberId).Include(m => m.Member).ToList();
-
-                var coachschedule = _context.Schedule.Where(s => s.EventId == s.Event.EventId && s.Event.MemberId == MemberId).Include(e => e.Event).ToList();
-
-                var schdules = from s in _context.Schedule
-                               select s;
-
-                var membersInEvent = from m in _context.Member
-                                     join s in _context.Schedule on m.MemberId equals s.MemberId
-                                     join e in _context.Event on s.EventId equals e.EventId
-                                     select e;
-
-                var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
-                {
-                    Schedules = coachschedule,
-                    Events = membersInEvent.ToList()
-
-
-                });
+                var allEvents = _context.Event
+                    .Include(member => member.Member)
+                    .ToList();
 
                 var eVM2 = new EventSchduleViewModel
                 {
-                    Schedules = coachschedule,
-                    Events = membersInEvent.ToList()
+
+                    Events = allEvents.ToList()
+
+                };
+                return View(eVM2);
+            }
+
+            if (MemberIdString != null)
+            {
+
+                var coachesEvents = _context.Event
+                    .Include(member => member.Member)
+                    .Where(e => e.MemberId == MemberId)
+                    .ToList();
+
+
+                var memberSchedule = _context.Schedule
+                    .Where(e => e.MemberId == MemberId)
+                    .Include(events => events.Event)
+                    .Include(events => events.Event.Member)
+                    .ToList();
+
+
+                var eVM2 = new EventSchduleViewModel
+                {
+
+                    Events = coachesEvents.ToList(),
+                    MemberSchedule = memberSchedule.ToList()
 
                 };
 
                 return View(eVM2);
             }
+
 
 
             return RedirectToAction("Login", "Home");
@@ -73,42 +84,47 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
-            var MemberIdString = HttpContext.Session.GetString("MemberId");
+            var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleIdString = HttpContext.Session.GetString("RoleId");
 
-            bool v = Int32.TryParse(MemberIdString, out int MemberId);
             Int32.TryParse(RoleIdString, out int RoleId);
 
-            if (MemberIdString != null)
+            if (MemberId != null && RoleId == 1 || RoleId == 2)
             {
+                var schedule = _context.Schedule.FirstOrDefault(s => s.ScheduleId == id);
+
+                var selectedEvent = _context.Event.FirstOrDefault(e => e.EventId == id);
 
 
 
-                var coachEvents = from m in _context.Member
-                                  join s in _context.Schedule on m.MemberId equals s.MemberId
-                                  join e in _context.Event on s.EventId equals e.EventId
-                                  where s.Event.MemberId == MemberId
-                                  select e;
+                if (schedule == null)
+                {
+                    return NotFound();
+                }
 
+                var coachEvents = _context.Event.Where(c => c.MemberId == RoleId).ToList();
 
+                var members = _context.Member.Where(c => c.MemberId == schedule.MemberId).ToList();
 
+                var membersInEvent = from m in _context.Member
+                                     join s in _context.Schedule on m.MemberId equals s.MemberId
+                                     join e in _context.Event on s.EventId equals e.EventId
+                                     where e.EventId == selectedEvent.EventId
+                                     select m;
 
                 var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
                 {
-                    Events = coachEvents.ToList()
-
+                    Members = membersInEvent.ToList()
                 });
 
                 var eVM2 = new EventSchduleViewModel
                 {
-
-                    Events = coachEvents.ToList()
+                    Members = membersInEvent.ToList()
 
                 };
 
                 return View(eVM2);
             }
-
 
             return RedirectToAction("Login", "Home");
 
@@ -118,6 +134,7 @@ namespace WebApplication1.Controllers
         // GET: Schedules/Create
         public IActionResult Create()
         {
+
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
@@ -125,13 +142,15 @@ namespace WebApplication1.Controllers
             {
                 return View();
             }
-            return RedirectToAction("Login", "Home");
+
+
+            return NotFound();
         }
 
-            // POST: Schedules/Create
-            // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-            // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-            [HttpPost]
+        // POST: Schedules/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ScheduleId")] Schedule schedule)
         {
@@ -151,12 +170,12 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
+
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
-            if (MemberId != null && RoleId == "1" || RoleId == "2")
+            if (MemberId != null && RoleId == "1")
             {
-
                 var schedule = await _context.Schedule.FindAsync(id);
                 if (schedule == null)
                 {
@@ -164,12 +183,16 @@ namespace WebApplication1.Controllers
                 }
                 return View(schedule);
             }
-            return RedirectToAction("Login", "Home");
+
+
+            return NotFound();
+
+
         }
 
-            // POST: Schedules/Edit/5
-            // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-            // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Schedules/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ScheduleId")] Schedule schedule)
@@ -213,10 +236,10 @@ namespace WebApplication1.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
-            if (MemberId != null && RoleId == "1" || RoleId == "2")
+            if (MemberId != null && RoleId == "1")
             {
                 var schedule = await _context.Schedule
-                .FirstOrDefaultAsync(m => m.ScheduleId == id);
+                    .FirstOrDefaultAsync(m => m.ScheduleId == id);
                 if (schedule == null)
                 {
                     return NotFound();
@@ -224,10 +247,13 @@ namespace WebApplication1.Controllers
 
                 return View(schedule);
             }
-            return RedirectToAction("Login", "Home");
+
+
+            return NotFound();
+
         }
 
-            // POST: Schedules/Delete/5
+        // POST: Schedules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -242,5 +268,6 @@ namespace WebApplication1.Controllers
         {
             return _context.Schedule.Any(e => e.ScheduleId == id);
         }
+
     }
 }

@@ -162,11 +162,11 @@ namespace WebApplication1.Controllers
 
                 return View(coach);
             }
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
-            // POST: Coaches/Delete/5
-            [HttpPost, ActionName("Delete")]
+        // POST: Coaches/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

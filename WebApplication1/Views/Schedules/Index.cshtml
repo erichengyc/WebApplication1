@@ -1,31 +1,94 @@
 ﻿@model EventSchduleViewModel
+@using Microsoft.AspNetCore.Http
+
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>My Events</h2>
-
-<table class="pure-table pure-table-horizontal">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.eventName)</th>
-            <th>@Html.DisplayNameFor(model => model.coach)</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Events)
-        {
-
+@if (Context.Session.GetString("RoleId") == "1")
+{
+    <h2>Current Event Schedules</h2>
+    <table class="pure-table pure-table-horizontal">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Member.Name)</td>
-                <td>
-                    <a class="button-success pure-button" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
-                    <a class="button-success pure-button" asp-controller="Schedules" asp-action="Details" asp-route-id="@item.EventId">View Members</a>
-                </td>
+                <th>@Html.DisplayNameFor(model => model.eventName)</th>
+                <th>@Html.DisplayNameFor(model => model.coach)</th>
+
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Events)
+            {
+
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td><a asp-controller="Coaches" asp-action="Details" asp-route-id="@item.MemberId">@Html.DisplayFor(modelItem => item.Member.Name)</a></td>
+                    <td>
+                        <a class="button-success pure-button" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                        <a class="button-success pure-button" asp-controller="Schedules" asp-action="Details" asp-route-id="@item.EventId">View Members</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Context.Session.GetString("RoleId") == "2")
+{
+    <h2>My Events and Schedules</h2>
+    <table class="pure-table pure-table-horizontal">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.eventName)</th>
+                <th>@Html.DisplayNameFor(model => model.coach)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Events)
+            {
+
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td><a asp-controller="Coaches" asp-action="Details" asp-route-id="@item.MemberId">@Html.DisplayFor(modelItem => item.Member.Name)</a></td>
+                    <td>
+                        <a class="button-success pure-button" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                        <a class="button-success pure-button" asp-controller="Schedules" asp-action="Details" asp-route-id="@item.EventId">View Members</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else if (Context.Session.GetString("RoleId") == "3")
+{
+    <h2>My Events and Schedules</h2>
+    <table class="pure-table pure-table-horizontal">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.eventName)</th>
+                <th>@Html.DisplayNameFor(model => model.coach)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.MemberSchedule)
+            {
+
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Event.Name)</td>
+                    <td><a asp-controller="Coaches" asp-action="Details" asp-route-id="@item.Event.MemberId">@Html.DisplayFor(modelItem => item.Event.Member.Name)</a></td>
+                    <td>
+                        <a class="button-success pure-button" asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

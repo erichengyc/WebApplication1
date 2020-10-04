@@ -118,7 +118,8 @@ namespace WebApplication1.Controllers
             {
                 return View();
             }
-            return RedirectToAction("Login", "Home");
+            return NotFound();
+
         }
 
         // POST: Events/Create
@@ -157,7 +158,8 @@ namespace WebApplication1.Controllers
                 }
                 return View(@event);
             }
-            return RedirectToAction("Login", "Home");
+            return NotFound();
+
         }
 
         // POST: Events/Edit/5
@@ -217,7 +219,7 @@ namespace WebApplication1.Controllers
 
                 return View(@event);
             }
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
         // POST: Events/Delete/5

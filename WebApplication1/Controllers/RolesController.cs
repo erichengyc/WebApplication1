@@ -29,7 +29,8 @@ namespace WebApplication1.Controllers
             {
                 return View(await _context.Role.ToListAsync());
             }
-            return RedirectToAction("Login", "Home");
+            return NotFound();
+
         }
 
         // GET: Roles/Details/5
@@ -54,7 +55,7 @@ namespace WebApplication1.Controllers
 
                 return View(role);
             }
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
         // GET: Roles/Create
@@ -67,12 +68,13 @@ namespace WebApplication1.Controllers
             {
                 return View();
             }
-            return RedirectToAction("Login", "Home");
+            return NotFound();
+
         }
 
-            // POST: Roles/Create
-            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-            // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Roles/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RoleId,RoleType")] Role role)
@@ -109,7 +111,7 @@ namespace WebApplication1.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
 
 
         }
@@ -172,11 +174,11 @@ namespace WebApplication1.Controllers
 
                 return View(role);
             }
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
-            // POST: Roles/Delete/5
-            [HttpPost, ActionName("Delete")]
+        // POST: Roles/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

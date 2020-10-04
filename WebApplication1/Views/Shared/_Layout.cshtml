@@ -5,10 +5,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] Anyone for Tennis?</title>
+    <title>@ViewData["Title"] - Web</title>
 
     <!--DO NOT DELETE THE LINE BELOW OR ELSE WEBSITE WILL NOT FUNCTION PROPERLY-->
     <partial name="_CookieConsentPartial" />
+
 
     <environment include="Development">
         <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous">
@@ -46,49 +47,161 @@
     </environment>
 </head>
 <body>
+    <!---------------------------------------------------------------------------------- Start of HB Navbar------------------------------------------------------------------------------------------------------------------>
+    <header class="header">
+        <a href="" class="logo">CSS Nav</a>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+            <!---------------------------------------------------------------------------------- Start of HB Content------------------------------------------------------------------------------------------------------------------>
+            <div class="pure-menu pure-menu-horizontal">
+                <ul class="pure-menu-list">
 
+                    @if (Context.Session.GetString("RoleId") == "3")
+                    {
+
+                        <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link"><i class="fa fa-handshake"></i> Coaches</a></li>
+
+                        <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> My Schedules</a></li>
+
+                        <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> Events</a></li>
+
+
+
+
+                        <!--------------------------------------Temporary until dropdown is fixed.--------------------------------------------------------->
+                        <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
+                        <!-------------------------------------end of Temporary-------------------------------------------------------------------------------->
+
+
+
+
+
+                        <ul class="pure-menu-list">
+
+                            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                                <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
+                                <ul class="pure-menu-children">
+                                    <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
+                                    <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <li class="pure-menu-item">Welcome @Context.Session.GetString("Name")</li>
+                    }
+                    else if (Context.Session.GetString("RoleId") == "2")
+                    {
+
+                        <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link"><i class="fa fa-handshake"></i> Coaches</a></li>
+
+                        <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> Events</a></li>
+
+                        <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> My Schedules</a></li>
+
+                        <ul class="pure-menu-list">
+                            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                                <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
+                                <ul class="pure-menu-children">
+                                    <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
+                                    <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
+                                </ul>
+                            </li>
+
+
+                        </ul>
+                        <li class="pure-menu-item">Welcome @Context.Session.GetString("Name")</li>
+
+                    }
+                    else if (Context.Session.GetString("RoleId") == "1")
+                    {
+
+                        <li class="pure-menu-item"><a asp-controller="Roles" asp-action="Index" class="pure-menu-link"><i class="fa fa-user-circle"></i> Roles</a></li>
+
+                        <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link"><i class="fa fa-handshake"></i> Coaches</a></li>
+
+                        <li class="pure-menu-item"><a asp-controller="Members" asp-action="Index" class="pure-menu-link"><i class="fa fa-users"></i> Members</a></li>
+
+                        <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> All Events</a></li>
+
+                        <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> All Schedules</a></li>
+
+                        <ul class="pure-menu-list">
+                            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                                <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
+                                <ul class="pure-menu-children">
+                                    <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
+                                    <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <li class="pure-menu-item">Welcome @Context.Session.GetString("Name")</li>
+
+                    }
+                    else
+                    {
+
+                        <li class="pure-menu-item"><a asp-controller="Home" asp-action="Register" class="pure-menu-link">Register</a></li>
+                        <li class="pure-menu-item"><i class="fa fa-user-circle"></i></li>
+                        <li class="pure-menu-item"><a asp-controller="Home" asp-action="Login" class="pure-menu-link">Login</a></li>
+                    }
+
+            </div>
+            <!---------------------------------------------------------------------------------- End of HB Content------------------------------------------------------------------------------------------------------------------>
+        </ul>
+    </header>
+    <!---------------------------------------------------------------------------------- End of HB Navbar------------------------------------------------------------------------------------------------------------------>
+    <!---------------------------------------------------------------------------------- Start of Navbar------------------------------------------------------------------------------------------------------------------>
     <div class="pure-menu pure-menu-horizontal">
-        <a <a asp-controller="Home" asp-action="Index" class="pure-menu-heading">Web Schedule</a>
+        <a <a asp-controller="Home" asp-action="Index" class="pure-menu-heading">AFT Schedule</a>
+
            <ul class="pure-menu-list">
 
-               @if (Context.Session.GetInt32("RoleId") == 3)
+               @if (Context.Session.GetString("RoleId") == "3")
                {
+
                    <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link"><i class="fa fa-handshake"></i> Coaches</a></li>
 
-                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> Schedules</a></li>
+                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> My Schedules</a></li>
 
                    <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> Events</a></li>
 
 
-
                    <ul class="pure-menu-list">
+
                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                            <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
                            <ul class="pure-menu-children">
-                               <li class="pure-menu-item"><a href="#" class="pure-menu-link">Options</a></li>
+                               <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
                                <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
                            </ul>
                        </li>
+
                    </ul>
+                   <li class="pure-menu-item">Welcome @Context.Session.GetString("Name")</li>
                }
                else if (Context.Session.GetString("RoleId") == "2")
                {
-                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> Schedules</a></li>
+
+                   <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link"><i class="fa fa-handshake"></i> Coaches</a></li>
 
                    <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> Events</a></li>
 
+                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> My Schedules</a></li>
 
                    <ul class="pure-menu-list">
-                       <li class="pure-menu-item"><i class="fa fa-user"></i></li>
                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                            <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
                            <ul class="pure-menu-children">
-                               <li class="pure-menu-item"><a href="#" class="pure-menu-link">Options</a></li>
+                               <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
                                <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
                            </ul>
                        </li>
 
+
                    </ul>
+                   <li class="pure-menu-item">Welcome @Context.Session.GetString("Name")</li>
 
                }
                else if (Context.Session.GetString("RoleId") == "1")
@@ -96,35 +209,39 @@
 
                    <li class="pure-menu-item"><a asp-controller="Roles" asp-action="Index" class="pure-menu-link"><i class="fa fa-user-circle"></i> Roles</a></li>
 
-                   <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> Events</a></li>
-
                    <li class="pure-menu-item"><a asp-controller="Coaches" asp-action="Index" class="pure-menu-link"><i class="fa fa-handshake"></i> Coaches</a></li>
 
                    <li class="pure-menu-item"><a asp-controller="Members" asp-action="Index" class="pure-menu-link"><i class="fa fa-users"></i> Members</a></li>
 
-                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> Schedules</a></li>
+                   <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> All Events</a></li>
+
+                   <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> All Schedules</a></li>
 
                    <ul class="pure-menu-list">
                        <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                            <a href="#" id="menuLink1" class="pure-menu-link"><i class="fa fa-user"></i> Account</a>
                            <ul class="pure-menu-children">
-                               <li class="pure-menu-item"><a href="#" class="pure-menu-link">Options</a></li>
+                               <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
                                <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
                            </ul>
                        </li>
 
                    </ul>
+                   <li class="pure-menu-item">Welcome @Context.Session.GetString("Name")</li>
 
                }
                else
                {
+
                    <li class="pure-menu-item"><a asp-controller="Home" asp-action="Register" class="pure-menu-link">Register</a></li>
                    <li class="pure-menu-item"><i class="fa fa-user-circle"></i></li>
                    <li class="pure-menu-item"><a asp-controller="Home" asp-action="Login" class="pure-menu-link">Login</a></li>
                }
 
-           </ul>
     </div>
+
+    <!---------------------------------------------------------------------------------- End of Navbar------------------------------------------------------------------------------------------------------------------>
+
 
     <div>
         @RenderBody()
@@ -132,12 +249,12 @@
 
 
     <div class="footer l-box">
-        <p>Hello this webpage was developed as a group assesment for HIT337, this group consisted of Jason Mu, Andrew Thai, Quang Tran, Rayven Nguyen.</p>
-        <p>
-            Disclaimer for AFTS If you require any more information or have any questions about our site’s disclaimer,
-            please feel free to contact us by email at Web.Support@cdu.edu.au.
-            This Webpage was written and designed by Eric, Shaayka, Hartik 2020. Copyright
 
+        <p>Hello this webpage was developed as a group assesment for HIT337, this group consisted of Eric, Shaakya, HArtik.</p>
+        <p>
+            Disclaimer for Web If you require any more information or have any questions about our site’s disclaimer,
+            please feel free to contact us by email at Web.Support@cdu.edu.au.
+            This Webpage was written and designed by Eric 2020. Copyright
         </p>
     </div>
 

@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Member.ToList());
+            return View();
         }
 
         public IActionResult About()
@@ -46,8 +46,15 @@ namespace WebApplication1.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int id)
         {
+
+            if (id == 404)
+            {
+                return View("StatusCode404");
+            }
+
+
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
@@ -72,7 +79,8 @@ namespace WebApplication1.Controllers
                     ModelState.Clear();
                     ViewBag.Message = user.Email + " has successfully registered.";
                 }
-                return View();
+                return RedirectToAction("Index", "Home");
+
             }
             return RedirectToAction("Index", "Home");
         }
@@ -98,6 +106,7 @@ namespace WebApplication1.Controllers
             if (account != null)
             {
                 HttpContext.Session.SetString("MemberId", account.MemberId.ToString());
+                HttpContext.Session.SetString("Name", account.Name.ToString());
                 HttpContext.Session.SetString("Email", account.Email);
                 HttpContext.Session.SetString("RoleId", account.RoleId.ToString());
                 return RedirectToAction("Welcome");

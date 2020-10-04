@@ -33,8 +33,7 @@ namespace WebApplication1.Controllers
                 return View(await _context.Member.Include(roles => roles.Role).ToListAsync());
             }
 
-            return RedirectToAction("Login", "Home");
-
+            return NotFound();
         }
 
         // GET: Members/Details/5
@@ -89,7 +88,7 @@ namespace WebApplication1.Controllers
             }
 
 
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
         // POST: Members/Create
@@ -105,7 +104,7 @@ namespace WebApplication1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(member);
+            return NotFound();
         }
 
         // GET: Members/Edit/5
@@ -141,8 +140,7 @@ namespace WebApplication1.Controllers
                 return View(member);
             }
 
-            return RedirectToAction("Login", "Home");
-
+            return NotFound();
         }
 
         // POST: Members/Edit/5
@@ -202,7 +200,7 @@ namespace WebApplication1.Controllers
 
                 return View(member);
             }
-            return RedirectToAction("Login", "Home");
+            return NotFound();
         }
 
         // POST: Members/Delete/5

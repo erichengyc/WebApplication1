@@ -74,23 +74,6 @@
                 </div>
 
             }
-            else if (Context.Session.GetString("RoleId") == "2")
-            {
-                <input type="hidden" asp-for="Name" />
-                <input type="hidden" asp-for="Nickname" />
-                <input type="hidden" asp-for="Email" />
-                <input type="hidden" asp-for="Password" />
-                <input type="hidden" asp-for="Dob" />
-                <input type="hidden" asp-for="Gender" />
-                <input type="hidden" asp-for="RoleId" />
-                <div class="form-group">
-                    <label asp-for="Biography" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <textarea asp-for="Biography" class="form-control"></textarea>
-                        <span asp-validation-for="Biography" class="text-danger"></span>
-                    </div>
-                </div>
-            }
 
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -100,7 +83,7 @@
 </div>
 
 <div>
-    <a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")">Back to account</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
