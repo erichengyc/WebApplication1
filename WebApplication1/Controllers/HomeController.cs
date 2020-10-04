@@ -23,27 +23,10 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
 
             return View();
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(int id)
@@ -58,6 +41,8 @@ namespace WebApplication1.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        // GET: Home/Register
+
         public ActionResult Register()
         {
             return View();
@@ -69,6 +54,8 @@ namespace WebApplication1.Controllers
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
+
+            // Checks if user is not registered
 
             if (MemberId == null)
             {
@@ -85,10 +72,14 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // GET: Home/Login
+
         public ActionResult Login()
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
+
+            // Checks if user is not logged in
 
             if (MemberId == null)
             {
@@ -98,10 +89,13 @@ namespace WebApplication1.Controllers
 
         }
 
+        // POST: Home/Login
 
         [HttpPost]
         public ActionResult Login(Member user)
         {
+            // Checks if user have entered the correct email and password
+
             var account = _context.Member.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
             if (account != null)
             {
@@ -109,7 +103,7 @@ namespace WebApplication1.Controllers
                 HttpContext.Session.SetString("Name", account.Name.ToString());
                 HttpContext.Session.SetString("Email", account.Email);
                 HttpContext.Session.SetString("RoleId", account.RoleId.ToString());
-                return RedirectToAction("Welcome");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -118,6 +112,8 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+        // GET: Home/Welcome
 
         public ActionResult Welcome()
         {
@@ -136,6 +132,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult Logout()
         {
+            //Logout clears the session
             HttpContext.Session.Clear();
             return RedirectToAction("Index");
         }

@@ -1,91 +1,138 @@
-﻿@model WebApplication1.Models.Member
+﻿@model IEnumerable<WebApplication1.Models.Member>
 @using Microsoft.AspNetCore.Http
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Index";
 }
 
-<h2>Edit</h2>
+<h2>All Coaches</h2>
+@if (Context.Session.GetString("RoleId") == "1")
+{
 
-<h4>Member</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="MemberId" />
-            @if (Context.Session.GetString("RoleId") == "1")
+
+    <table class="pure-table pure-table-horizontal">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MemberId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Role)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nickname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dob)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Biography)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                <div class="form-group">
-                    <label asp-for="Name" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Nickname" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Nickname" class="form-control" />
-                        <span asp-validation-for="Nickname" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Dob" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Dob" class="form-control" />
-                        <span asp-validation-for="Dob" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Gender" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Gender" class="form-control" />
-                        <span asp-validation-for="Gender" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Biography" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Biography" class="form-control" />
-                        <span asp-validation-for="Biography" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="RoleId" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="RoleId" class="form-control" />
-                        <span asp-validation-for="RoleId" class="text-danger"></span>
-                    </div>
-                </div>
-
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MemberId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role.RoleType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dob)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Biography)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.MemberId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.MemberId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.MemberId">Delete</a>
+                    </td>
+                </tr>
             }
-
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        </tbody>
+    </table>
 }
+
+else if (Context.Session.GetString("RoleId") == "2" || Context.Session.GetString("RoleId") == "3")
+{
+
+    <table class="pure-table pure-table-horizontal">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nickname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dob)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Biography)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dob)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Biography)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.MemberId">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

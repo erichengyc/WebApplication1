@@ -16,7 +16,6 @@ namespace WebApplication1.Models
         {
         }
 
-        public virtual DbSet<Coach> Coach { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<Member> Member { get; set; }
         public virtual DbSet<Schedule> Schedule { get; set; }
@@ -33,31 +32,6 @@ namespace WebApplication1.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Coach>(entity =>
-            {
-                entity.ToTable("coach");
-
-                entity.Property(e => e.CoachId).HasColumnName("coach_id");
-
-                entity.Property(e => e.Biography)
-                    .HasColumnName("biography")
-                    .HasColumnType("text");
-
-                entity.Property(e => e.Dob)
-                    .HasColumnName("dob")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Nickname)
-                    .HasColumnName("nickname")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-            });
 
             modelBuilder.Entity<Event>(entity =>
             {

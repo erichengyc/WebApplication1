@@ -6,24 +6,30 @@
 
 <h2>Details</h2>
 
-<h4>Schedule</h4>
-<table class="pure-table pure-table-horizontal">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Members)</th>
+<h3>Schedule</h3>
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Members)
-        {
-
+@if (Model.Members.Count == 0)
+{
+    <h4>You have no members enrolled in this event</h4>
+}
+else
+{
+    <table class="pure-table pure-table-horizontal">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <th>@Html.DisplayNameFor(model => model.Members)</th>
+
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Members)
+            {
 
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
-
-    </tbody>
-</table>

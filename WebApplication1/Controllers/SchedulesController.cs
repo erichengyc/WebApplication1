@@ -29,6 +29,8 @@ namespace WebApplication1.Controllers
             Int32.TryParse(MemberIdString, out int MemberId);
             Int32.TryParse(RoleIdString, out int RoleId);
 
+            //Only admins can view all scheduled events. Admin have a role id of 1
+
             if (MemberIdString != null && MemberId == 1)
             {
                 var allEvents = _context.Event
@@ -44,14 +46,18 @@ namespace WebApplication1.Controllers
                 return View(eVM2);
             }
 
+            //Coaches and members can see all their events and schedules
+
             if (MemberIdString != null)
             {
+                // Retrieve all the coache's events
 
                 var coachesEvents = _context.Event
                     .Include(member => member.Member)
                     .Where(e => e.MemberId == MemberId)
                     .ToList();
 
+                // Retrieve all the member's event
 
                 var memberSchedule = _context.Schedule
                     .Where(e => e.MemberId == MemberId)
@@ -59,6 +65,7 @@ namespace WebApplication1.Controllers
                     .Include(events => events.Event.Member)
                     .ToList();
 
+                // Add retrieve data into the viewmodel
 
                 var eVM2 = new EventSchduleViewModel
                 {
@@ -89,22 +96,15 @@ namespace WebApplication1.Controllers
 
             Int32.TryParse(RoleIdString, out int RoleId);
 
+            // Coaches and members can see details about thier events. Coaches see all members enrolled in their event
+
             if (MemberId != null && RoleId == 1 || RoleId == 2)
             {
                 var schedule = _context.Schedule.FirstOrDefault(s => s.ScheduleId == id);
+                // Retrieve the selected event
 
                 var selectedEvent = _context.Event.FirstOrDefault(e => e.EventId == id);
-
-
-
-                if (schedule == null)
-                {
-                    return NotFound();
-                }
-
-                var coachEvents = _context.Event.Where(c => c.MemberId == RoleId).ToList();
-
-                var members = _context.Member.Where(c => c.MemberId == schedule.MemberId).ToList();
+                // Retrieve all members enrolled in selected even
 
                 var membersInEvent = from m in _context.Member
                                      join s in _context.Schedule on m.MemberId equals s.MemberId
@@ -112,16 +112,18 @@ namespace WebApplication1.Controllers
                                      where e.EventId == selectedEvent.EventId
                                      select m;
 
-                var eVM = _context.Schedule.Select(s => new EventSchduleViewModel
-                {
-                    Members = membersInEvent.ToList()
-                });
+                // Add retrieve data into the viewmodel
 
                 var eVM2 = new EventSchduleViewModel
                 {
                     Members = membersInEvent.ToList()
 
                 };
+
+                if (schedule == null)
+                {
+                    return View(eVM2);
+                }
 
                 return View(eVM2);
             }
@@ -138,7 +140,8 @@ namespace WebApplication1.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
-            if (MemberId != null && RoleId == "1" || RoleId == "2")
+            //Only admins can view this page. Admin have a role id of 1
+            if (MemberId != null && RoleId == "1")
             {
                 return View();
             }
@@ -148,8 +151,6 @@ namespace WebApplication1.Controllers
         }
 
         // POST: Schedules/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ScheduleId")] Schedule schedule)
@@ -173,6 +174,8 @@ namespace WebApplication1.Controllers
 
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
+
+            //Only admins can view this page. Admin have a role id of 1
 
             if (MemberId != null && RoleId == "1")
             {
@@ -235,6 +238,8 @@ namespace WebApplication1.Controllers
 
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
+
+            //Only admins can view this page. Admin have a role id of 1
 
             if (MemberId != null && RoleId == "1")
             {

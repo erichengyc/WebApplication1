@@ -101,8 +101,6 @@ else if (Context.Session.GetString("RoleId") == "1")
 
     <a asp-action="Edit" asp-route-id="@Model.EventId">Edit</a> |
     <a asp-action="Index">Back to List</a>
-    <a class="button-success pure-button" asp-controller="Schedule" asp-action="Details" asp-route-id="@Model.EventId">View Schedule</a>
-
 
     <form asp-action="Details">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>

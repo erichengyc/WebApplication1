@@ -25,6 +25,8 @@ namespace WebApplication1.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
+
             if (MemberId != null && RoleId == "1")
             {
                 return View(await _context.Role.ToListAsync());
@@ -43,6 +45,8 @@ namespace WebApplication1.Controllers
 
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
+
+            //Only admins can view this page. Admins have a role id of 1
 
             if (MemberId != null && RoleId == "1")
             {
@@ -98,6 +102,8 @@ namespace WebApplication1.Controllers
 
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
+
+            //Only admins can view this page. Admins have a role id of 1
 
             if (MemberId != null && RoleId == "1")
             {
@@ -163,6 +169,7 @@ namespace WebApplication1.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 var role = await _context.Role

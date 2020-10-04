@@ -2,89 +2,67 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace WebApplication1.Controllers
+namespace AFTS.Controllers
 {
     public class CoachesController : Controller
     {
         private readonly tennisContext _context;
-        
+
         public CoachesController(tennisContext context)
         {
             _context = context;
         }
 
-        // GET: Coaches
+        // GET: All Coaches. Coaches a members with a role id of 2
         public async Task<IActionResult> Index()
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
-            var RoleId = HttpContext.Session.GetString("RoleId");
 
             if (MemberId != null)
             {
                 return View(await _context.Member.Include(roles => roles.Role).Where(c => c.RoleId == 2).ToListAsync());
             }
+
             return RedirectToAction("Login", "Home");
+
         }
 
-        // GET: Coaches/Details/5
+        // GET: Coaches/Details/5 
         public async Task<IActionResult> Details(int? id)
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
-            var RoleId = HttpContext.Session.GetString("RoleId");
 
             if (id == null)
             {
                 return NotFound();
             }
 
-
             if (MemberId != null)
             {
-                var coach = await _context.Member
-                                            .FirstOrDefaultAsync(m => m.MemberId == id);
+                var coach = await _context.Member.FirstOrDefaultAsync(m => m.MemberId == id);
+
                 if (coach == null)
                 {
                     return NotFound();
                 }
 
-
                 return View(coach);
             }
 
             return RedirectToAction("Login", "Home");
-        }
 
-            // GET: Coaches/Create
-            public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Coaches/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CoachId,Name,Nickname,Dob,Biography")] Coach coach)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(coach);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(coach);
         }
 
         // GET: Coaches/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
@@ -93,23 +71,22 @@ namespace WebApplication1.Controllers
                 return NotFound();
             }
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
-
-                var coach = await _context.Coach.FindAsync(id);
+                var coach = await _context.Member.FindAsync(id);
                 if (coach == null)
                 {
                     return NotFound();
                 }
                 return View(coach);
             }
+
             return RedirectToAction("Login", "Home");
         }
 
-            // POST: Coaches/Edit/5
-            // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-            // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-            [HttpPost]
+        // POST: Coaches/Edit/5
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MemberId,Name,Nickname,Email,Password,Dob,Gender,Biography,RoleId")] Member coach)
         {
@@ -144,12 +121,16 @@ namespace WebApplication1.Controllers
         // GET: Coaches/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
+
             if (id == null)
             {
                 return NotFound();
             }
+
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
 
@@ -162,6 +143,7 @@ namespace WebApplication1.Controllers
 
                 return View(coach);
             }
+
             return NotFound();
         }
 

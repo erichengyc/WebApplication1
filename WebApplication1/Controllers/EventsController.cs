@@ -22,7 +22,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        // GET: Events
+        // GET: All Events
         public async Task<IActionResult> Index()
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
@@ -48,8 +48,8 @@ namespace WebApplication1.Controllers
             if (MemberId != null)
             {
 
-                var @event = await _context.Event
-                    .FirstOrDefaultAsync(m => m.EventId == id);
+                var @event = await _context.Event.FirstOrDefaultAsync(m => m.EventId == id);
+
                 if (@event == null)
                 {
                     return NotFound();
@@ -63,14 +63,11 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Details(int id, Schedule schedule)
         {
-            var events = _context.Event;
-            var @event = events.FirstOrDefault(e => e.EventId == id);
+            var @event = _context.Event.FirstOrDefault(e => e.EventId == id);
 
             if (ModelState.IsValid)
             {
 
-                var members = _context.Member;
-                var schedules = _context.Schedule;
 
                 var MemberIdString = HttpContext.Session.GetString("MemberId");
 
@@ -80,13 +77,17 @@ namespace WebApplication1.Controllers
 
                 var existingEnroll = await _context.Schedule.SingleOrDefaultAsync(s => s.Member.MemberId == MemberId && s.Event.EventId == id);
 
+                // Check if a user trys to enroll in the same event
+
                 if (existingEnroll != null)
                 {
                     ModelState.AddModelError("", "You have already enrolled in this event.");
                 }
+                // Enroll user in event
+
                 else
                 {
-                    var member = members.FirstOrDefault(m => m.MemberId == MemberId);
+                    var member = _context.Member.FirstOrDefault(m => m.MemberId == MemberId);
 
                     var eventSchedule = new Schedule()
                     {
@@ -113,6 +114,8 @@ namespace WebApplication1.Controllers
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
+
+            //Only admins can view this page. Admins have a role id of 1
 
             if (MemberId != null && RoleId == "1")
             {
@@ -147,6 +150,8 @@ namespace WebApplication1.Controllers
             }
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
+
+            //Only admins can view this page. Admins have a role id of 1
 
             if (MemberId != null && RoleId == "1")
             {
@@ -208,6 +213,7 @@ namespace WebApplication1.Controllers
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
+            //Only admins can view this page. Admins have a role id of 1
             if (MemberId != null && RoleId == "1")
             {
                 var @event = await _context.Event.FirstOrDefaultAsync(m => m.EventId == id);
