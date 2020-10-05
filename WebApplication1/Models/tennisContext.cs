@@ -7,19 +7,16 @@ namespace WebApplication1.Models
 {
     public partial class tennisContext : DbContext
     {
-        public tennisContext()
-        {
-        }
 
         public tennisContext(DbContextOptions<tennisContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Event> Event { get; set; }
-        public virtual DbSet<Member> Member { get; set; }
-        public virtual DbSet<Schedule> Schedule { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
+        public DbSet<Event> Event { get; set; }
+        public DbSet<Member> Member { get; set; }
+        public DbSet<Schedule> Schedule { get; set; }
+        public DbSet<Role> Role { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

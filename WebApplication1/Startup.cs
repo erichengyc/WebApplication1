@@ -36,13 +36,14 @@ namespace WebApplication1
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            services.AddDbContext<tennisContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<tennisContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // Services added for custom login
             services.AddDistributedMemoryCache();
             services.AddSession();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson();
+            services.AddRazorPages();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

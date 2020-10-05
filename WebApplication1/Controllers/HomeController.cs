@@ -73,30 +73,28 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Home/Login
-
         public ActionResult Login()
         {
             var MemberId = HttpContext.Session.GetString("MemberId");
             var RoleId = HttpContext.Session.GetString("RoleId");
 
             // Checks if user is not logged in
-
             if (MemberId == null)
             {
                 return View();
             }
+
             return RedirectToAction("Index", "Home");
 
         }
 
         // POST: Home/Login
-
         [HttpPost]
         public ActionResult Login(Member user)
         {
             // Checks if user have entered the correct email and password
-
             var account = _context.Member.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
+
             if (account != null)
             {
                 HttpContext.Session.SetString("MemberId", account.MemberId.ToString());
@@ -114,7 +112,6 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Home/Welcome
-
         public ActionResult Welcome()
         {
             if (HttpContext.Session.GetString("MemberId") != null)
@@ -122,6 +119,7 @@ namespace WebApplication1.Controllers
                 ViewBag.Email = HttpContext.Session.GetString("Email");
                 ViewBag.MemberId = HttpContext.Session.GetString("MemberId");
                 ViewBag.RoleId = HttpContext.Session.GetString("RoleId");
+
                 return View();
             }
             else
