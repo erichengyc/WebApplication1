@@ -18,60 +18,8 @@
     }
     else
     {
-            <div class="l-box">
-                <h3 class="information-head">Profile</h3>
 
-
-                <p>
-                    <!-- Pop up for log in -->
-                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="button-secondary pure-button">Login Popup</button>
-
-                    <div id="modal-wrapper" class="modal">
-
-                        <form class="modal-content animate" asp-controller="Home" asp-action="Login" method="post">
-
-                            <div class="imgcontainer">
-                                <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                                <img src="~/images/User Image.png" alt="Image goes here" class="avatar">
-                                <h1 style="text-align:center">AFTS Schedule Log In</h1>
-                            </div>
-
-                            <!-- Pop up user -->
-                            <div class="container" asp-controller="Home" asp-action="Login" method="post">
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="form-group">
-                                    <label asp-for="Email" class="col-md-2 control-label"></label>
-                                    <div class="col-md-10">
-                                        <input asp-for="Email" class="form-control" />
-                                        <span asp-validation-for="Email" class="text-danger"></span>
-                                    </div>
-                                </div>
-
-                                <!-- Pop up password -->
-                                <div class="form-group">
-                                    <label asp-for="Password" class="col-md-2 control-label"></label>
-                                    <div class="col-md-10">
-                                        <input asp-for="Password" class="form-control" />
-                                        <span asp-validation-for="Password" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-default">Login</button>
-                                <input type="checkbox" style="margin:26px 30px;"> Remember me
-                                <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
-                            </div>
-
-                        </form>
-
-                    </div>
-                    <!-- Pop up for Log in -->
-                    <!-- Pop up for Register -->
-                    <button onclick="location.href='/Home/Register'" class="button-secondary pure-button">Register</button>
-
-                    <!-- End of Pop up for Register -->
-
-                </p>
-
-            </div>
+            
     }
 
     <div class="information pure-g">
