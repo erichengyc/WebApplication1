@@ -13,7 +13,7 @@ namespace WebApplication1.Models
         public Member Member { get; set; }
         public DateTime Date { get; set; }
         public ICollection<Schedule> Schedules { get; set; }
-        public int MemberId { get; internal set; }
+        public int MemberId { get; set; }
         //public ICollection<EventSchduleViewModel> EventSchduleViewModels { get; set; }
     }
 }
