@@ -5,35 +5,36 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h2>Details</h2>
 
 @if (Context.Session.GetString("RoleId") == "3")
 {
     <div>
         <h4>Event</h4>
         <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
+        <dl class="dl-horizontal">
+            <dt>
                 @Html.DisplayNameFor(model => model.Name)
             </dt>
-            <dd class="col-sm-10">
+            <dd>
                 @Html.DisplayFor(model => model.Name)
             </dd>
-            <dt class="col-sm-2">
+            <dt>
                 @Html.DisplayNameFor(model => model.Description)
             </dt>
-            <dd class="col-sm-10">
+            <dd>
                 @Html.DisplayFor(model => model.Description)
             </dd>
-            <dt class="col-sm-2">
+            <dt>
                 @Html.DisplayNameFor(model => model.Date)
             </dt>
-            <dd class="col-sm-10">
+            <dd>
                 @Html.DisplayFor(model => model.Date)
             </dd>
         </dl>
     </div>
     <a asp-action="Index">Back to List</a>
+
     <div>
         <form asp-action="Details">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -75,39 +76,42 @@ else if (Context.Session.GetString("RoleId") == "2")
 }
 else if (Context.Session.GetString("RoleId") == "1")
 {
-<div>
-    <h4>Event</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-    </dl>
+    <div>
+        <h4>Event</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+        </dl>
 
-    <a asp-action="Edit" asp-route-id="@Model.EventId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.EventId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
 
-    <form asp-action="Details">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="EventId" />
-        <div class="form-group">
-            <input type="submit" value="Enroll" class="button-success pure-button" />
-        </div>
-    </form>
-</div>
+
+        <form asp-action="Details">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EventId" />
+            <div class="form-group">
+                <input type="submit" value="Enroll" class="button-success pure-button" />
+            </div>
+        </form>
+    </div>
 }
+
+
