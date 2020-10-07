@@ -54,7 +54,8 @@ p {
  */
 
 .banner {
-    background: transparent url('http://www.tennisworld.net.au/wp-content/uploads/2016/07/Canberra-Tennis-Centre.jpg');
+    /*Background goes here*/
+    background: transparent url('../images/51t752pMaML._AC_SX355_.jpg');
     text-align: center;
     background-size: cover;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://www.tennisworld.net.au/wp-content/uploads/2016/07/Canberra-Tennis-Centre.jpg', sizingMethod='scale');
