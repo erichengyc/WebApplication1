@@ -241,15 +241,13 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.HasIndex("MemberId");
-
                     b.ToTable("schedule");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Event", b =>
                 {
                     b.HasOne("WebApplication1.Models.Member", "Member")
-                        .WithMany("Events")
+                        .WithMany()
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -269,12 +267,6 @@ namespace WebApplication1.Migrations
                     b.HasOne("WebApplication1.Models.Event", "Event")
                         .WithMany("Schedules")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApplication1.Models.Member", "Member")
-                        .WithMany("Schedules")
-                        .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -11,8 +11,7 @@ namespace WebApplication1.Models
         public int MemberId { get; set; }
         public int EventId { get; set; }
         public Event Event { get; set; }
-        public Member Member { get; set; }
-
+        //public Member Member { get; set; }
         //public ICollection<EventSchduleViewModel> EventSchduleViewModels { get; set; }
     }
 }

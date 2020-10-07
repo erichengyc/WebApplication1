@@ -8,6 +8,7 @@ namespace WebApplication1.Models
 {
     public partial class Member
     {
+        [Key]
         public int MemberId { get; set; }
 
         [Required(ErrorMessage = "Name is required.")]
@@ -39,8 +40,8 @@ namespace WebApplication1.Models
         [Required(ErrorMessage = "Biography is required.")]
         public string Biography { get; set; }
 
-        public ICollection<Event> Events { get; set; }
-        public ICollection<Schedule> Schedules { get; set; }
+        //public ICollection<Event> Events { get; set; }
+        //public ICollection<Schedule> Schedules { get; set; }
         //public ICollection<EventSchduleViewModel> EventSchduleViewModels { get; set; }
 
     }

@@ -10,8 +10,8 @@ using WebApplication1.Models;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(tennisContext))]
-    [Migration("20201005010737_memberID")]
-    partial class memberID
+    [Migration("20201007103758_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -243,15 +243,13 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.HasIndex("MemberId");
-
                     b.ToTable("schedule");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Event", b =>
                 {
                     b.HasOne("WebApplication1.Models.Member", "Member")
-                        .WithMany("Events")
+                        .WithMany()
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -271,12 +269,6 @@ namespace WebApplication1.Migrations
                     b.HasOne("WebApplication1.Models.Event", "Event")
                         .WithMany("Schedules")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebApplication1.Models.Member", "Member")
-                        .WithMany("Schedules")
-                        .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -75,7 +75,7 @@ namespace WebApplication1.Controllers
 
 
 
-                var existingEnroll = await _context.Schedule.SingleOrDefaultAsync(s => s.Member.MemberId == MemberId && s.Event.EventId == id);
+                var existingEnroll = await _context.Schedule.SingleOrDefaultAsync(s => s.MemberId == MemberId && s.Event.EventId == id);
 
                 // Check if a user trys to enroll in the same event
 
@@ -91,7 +91,7 @@ namespace WebApplication1.Controllers
 
                     var eventSchedule = new Schedule()
                     {
-                        Member = member,
+                        //Member = member,
                         Event = @event
 
                     };
