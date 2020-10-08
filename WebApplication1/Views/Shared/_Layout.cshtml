@@ -51,6 +51,7 @@
                         <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i>Upcoming </a></li>
 
 
+                        <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
 
 
                         <!--------------------------------------Temporary until dropdown is fixed.--------------------------------------------------------->
@@ -65,8 +66,6 @@
 
                             <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                                 <ul class="pure-menu-children">
-                                    <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
-                                    <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
                                 </ul>
                             </li>
 
@@ -81,6 +80,12 @@
                         <li class="pure-menu-item"><a asp-controller="Events" asp-action="Index" class="pure-menu-link"><i class="fa fa-calendar-alt"></i> Events</a></li>
 
                         <li class="pure-menu-item"><a asp-controller="Schedules" asp-action="Index" class="pure-menu-link"><i class="fa fa-edit"></i> My Schedules</a></li>
+
+                        <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">My Account</a></li>
+
+
+                        <li class="pure-menu-item"><a asp-controller="Home" asp-action="Logout" class="pure-menu-link">Sign Out</a></li>
+
 
                         <ul class="pure-menu-list">
                             <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
@@ -122,7 +127,7 @@
                         <li class="pure-menu-item"><a asp-controller="Home" asp-action="Login" class="pure-menu-link">Sign in</a></li>
                     }
 
-            </div>
+</div>
             <!---------------------------------------------------------------------------------- End of HB Content------------------------------------------------------------------------------------------------------------------>
         </ul>
     </header>
