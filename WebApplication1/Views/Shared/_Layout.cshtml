@@ -71,7 +71,7 @@
                             </li>
 
                         </ul>
-                        <li class="pure-menu-item">Welcome @Context.Session.GetString("Name")</li>
+                        <li class="pure-menu-item"><a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")" class="pure-menu-link">Welcome @Context.Session.GetString("Name")</a></li>
                     }
                     else if (Context.Session.GetString("RoleId") == "2")
                     {
