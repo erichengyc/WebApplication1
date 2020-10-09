@@ -9,7 +9,8 @@
 
 @if (Context.Session.GetString("RoleId") == "3")
 {
-    <div>
+    <div class="card">
+        <div class="container">
         <h4>Event</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -32,11 +33,15 @@
                 @Html.DisplayFor(model => model.Date)
             </dd>
         </dl>
+        </div>
     </div>
+    <div class="card">
+        <div class="container">
     <a asp-action="Index">Back to List</a>
-
+        </div>
+    </div>
     <div>
-        <form asp-action="Details">
+        <form asp-action="Details" class="card">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EventId" />
             <div class="form-group">
@@ -48,7 +53,8 @@
 }
 else if (Context.Session.GetString("RoleId") == "2")
 {
-    <div>
+    <div class="card">
+        <div class="container">
         <h4>Event</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -71,47 +77,49 @@ else if (Context.Session.GetString("RoleId") == "2")
                 @Html.DisplayFor(model => model.Date)
             </dd>
         </dl>
-
+        </div>
     </div>
 }
 else if (Context.Session.GetString("RoleId") == "1")
 {
-    <div>
-        <h4>Event</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Date)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Date)
-            </dd>
-        </dl>
-
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+    </dl>
+    <div class="card">
+        <div class="container">
         <a asp-action="Edit" asp-route-id="@Model.EventId">Edit</a> |
         <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
 
-
-        <form asp-action="Details">
+        <form asp-action="Details" class="card">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EventId" />
             <div class="form-group">
                 <input type="submit" value="Enroll" class="button-success pure-button" />
             </div>
-        </form>
-    </div>
+    </form>
+</div>
 }
 
 
