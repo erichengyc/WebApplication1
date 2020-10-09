@@ -8,7 +8,8 @@
 <h2>Details</h2>
 @if (Context.Session.GetString("RoleId") == "1")
 {
-    <div>
+    <div class="card">
+        <div class="container">
         <h4>Member</h4>
         <hr />
 
@@ -50,16 +51,20 @@
                 @Html.DisplayFor(model => model.Biography)
             </dd>
         </dl>
+        </div>
     </div>
-    <div>
+    <div class="card">
+        <div class="container">
         <a asp-action="Edit" asp-route-id="@Model.MemberId">Edit</a> |
         <a asp-action="Index">Back to List</a>
+        </div>
     </div>
 
 }
 else if (Context.Session.GetString("RoleId") == "2" || Context.Session.GetString("RoleId") == "3")
 {
-    <div>
+    <div class="card">
+        <div class="container">
         <h4>Member</h4>
         <hr />
 
@@ -101,9 +106,12 @@ else if (Context.Session.GetString("RoleId") == "2" || Context.Session.GetString
                 @Html.DisplayFor(model => model.Biography)
             </dd>
         </dl>
+        </div>
     </div>
-    <div>
+    <div class="card">
+        <div class="container">
         <a asp-action="Index">Back to List</a>
+        </div>
     </div>
 }
 
