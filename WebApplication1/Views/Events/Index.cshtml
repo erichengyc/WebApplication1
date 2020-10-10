@@ -17,13 +17,12 @@
         <div class="pure-u-1 pure-u-md-1">
             <div class="card">
             <div class="container">
-            <table class="pure-table pure-table-horizontal">
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.Name)</th>
-                        <th>@Html.DisplayNameFor(model => model.Description)</th>
-                        <th>@Html.DisplayNameFor(model => model.Date)</th>
-                        <th></th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Date)</th>
                     </tr>
                 </thead>
 
@@ -37,8 +36,7 @@
                             <td>@Html.DisplayFor(modelItem => item.Description)</td>
                             <td>@Html.DisplayFor(modelItem => item.Date)</td>
                             <td>
-                                <a class="button-success pure-button" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
-
+                                <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
                             </td>
                         </tr>
                     }
@@ -59,13 +57,13 @@
             </p>
             <div class="card">
             <div class="container">
-            <table class="pure-table pure-table-horizontal">
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.Name)</th>
-                        <th>@Html.DisplayNameFor(model => model.Description)</th>
-                        <th>@Html.DisplayNameFor(model => model.Date)</th>
-                        <th></th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+                        <th scope="col">@Html.DisplayNameFor(model => model.Date)</th>
+                        <th scope="col"></th>
                         <th>Modify</th>
                     </tr>
                 </thead>
@@ -75,19 +73,21 @@
 
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Date)</td>
-                            <td>
-                                <a class="button-success pure-button" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                        <td>
+                            <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
 
-                            </td>
+                        </td>
+                        <td>
+                            <a type="button" class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.EventId">Edit</a>
+                       </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
-                                <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-                            </td>
-                        </tr>
+                            <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
+                        </td>
+                    </tr>
                     }
 
                 </tbody>
