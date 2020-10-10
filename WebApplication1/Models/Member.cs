@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,6 +40,8 @@ namespace WebApplication1.Models
 
         [Required(ErrorMessage = "Biography is required.")]
         public string Biography { get; set; }
+
+        public ICollection<Schedule> Schedules { get; set; }
 
         //public ICollection<Event> Events { get; set; }
         //public ICollection<Schedule> Schedules { get; set; }
