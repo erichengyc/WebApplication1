@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Contoso University</title>
+    <title>@ViewData["Title"] - Tennis Contest</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -21,9 +21,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Contoso University</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Tennis Contest</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,29 +33,29 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Index">Members</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Members" asp-action="Index">Members</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">All Events</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Events" asp-action="Index">All Events</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Schedules" asp-action="Index">All Schedules</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Schedules" asp-action="Index">All Schedules</a>
                             </li>
                         </ul>
                     </div>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")">@Context.Session.GetString("Name") | My Account</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")">@Context.Session.GetString("Name") | My Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
                             </li>
                         </ul>
                     </div>
@@ -65,23 +65,23 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">All Events</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Events" asp-action="Index">All Events</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="My Schedules" asp-action="Index">All Schedules</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="My Schedules" asp-action="Index">All Schedules</a>
                             </li>
                         </ul>
                     </div>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")">@Context.Session.GetString("Name") | My Account</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")">@Context.Session.GetString("Name") | My Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
                             </li>
                         </ul>
                     </div>
@@ -92,23 +92,23 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Coaches" asp-action="Index">Coaches</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">Events</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Events" asp-action="Index">Events</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Schedules" asp-action="Index">My Schedules</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Schedules" asp-action="Index">My Schedules</a>
                             </li>
                         </ul>
                     </div>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")">@Context.Session.GetString("Name") | My Account</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")">@Context.Session.GetString("Name") | My Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Logout">Sign Out</a>
                             </li>
                         </ul>
                     </div>
@@ -118,10 +118,10 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                             </li>
                         </ul>
                     </div>
@@ -138,7 +138,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - Contoso University - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - Tennis Contest 
         </div>
     </footer>
 

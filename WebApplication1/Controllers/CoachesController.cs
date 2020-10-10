@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApplication1.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace AFTS.Controllers
+namespace WebApplication1.Controllers
 {
     public class CoachesController : Controller
     {
