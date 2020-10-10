@@ -8,7 +8,9 @@
 
 @if (Context.Session.GetString("RoleId") == "1")
 {
-    <h2>All Coaches</h2>
+    <h2 class="heading">All Coaches</h2>
+    <div class="card">
+    <div class="container">
     <table class="pure-table pure-table-horizontal">
         <thead>
             <tr>
@@ -76,11 +78,15 @@
             }
         </tbody>
     </table>
+    </div>
+    </div>
 }
 
 else if (Context.Session.GetString("RoleId") == "2" || Context.Session.GetString("RoleId") == "3")
 {
-
+<h2 class="heading">All Coaches</h2>
+    <div class="card">
+        <div class="container">
     <table class="pure-table pure-table-horizontal">
         <thead>
             <tr>
@@ -133,5 +139,7 @@ else if (Context.Session.GetString("RoleId") == "2" || Context.Session.GetString
             }
         </tbody>
     </table>
+    </div>
+    </div>
 }
 
