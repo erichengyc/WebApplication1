@@ -8,7 +8,7 @@
 
 @if (Context.Session.GetString("RoleId") == "1")
 {
-    <h2>All Coaches</h2>
+    <h2 class="heading">All Coaches</h2>
     <table class="pure-table pure-table-horizontal">
         <thead>
             <tr>
@@ -80,7 +80,7 @@
 
 else if (Context.Session.GetString("RoleId") == "2" || Context.Session.GetString("RoleId") == "3")
 {
-
+<h2 class="heading">All Coaches</h2>
     <table class="pure-table pure-table-horizontal">
         <thead>
             <tr>
