@@ -68,7 +68,7 @@ namespace WebApplication1.Models
                 entity.Property(e => e.Gender)
                     .IsRequired()
                     .HasColumnName("gender")
-                    .HasMaxLength(1)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
