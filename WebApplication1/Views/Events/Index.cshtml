@@ -16,83 +16,82 @@
 
         <div class="pure-u-1 pure-u-md-1">
             <div class="card">
-            <div class="container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.Date)</th>
-                    </tr>
-                </thead>
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.Date)</th>
+                            </tr>
+                        </thead>
 
-                <tbody>
+                        <tbody>
 
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Date)</td>
-                            <td>
-                                <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
-                            </td>
-                        </tr>
-                    }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                                    <td>
+                                        <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                                    </td>
+                                </tr>
+                            }
 
-                </tbody>
-            </table>
-            </div>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     }
     else if (Context.Session.GetString("RoleId") == "1")
     {
-
-        <div class="pure-u-1 pure-u-md-1">
-
-            <p>
-                <a type="button" class="btn btn-primary" asp-action="Create">Create New</a>
-            </p>
-            <div class="card">
+        <div class="card">
             <div class="container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
-                        <th scope="col">@Html.DisplayNameFor(model => model.Date)</th>
-                        <th scope="col"></th>
-                        <th>Modify</th>
-                    </tr>
-                </thead>
+                <div class="pure-u-1 pure-u-md-1">
 
-                <tbody>
+                    <p>
+                        <a type="button" class="btn btn-primary" asp-action="Create">Create New</a>
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
+                                <th scope="col">@Html.DisplayNameFor(model => model.Date)</th>
+                                <th scope="col"></th>
+                                <th>Modify</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
 
 
-                    @foreach (var item in Model)
-                    {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Date)</td>
-                        <td>
-                            <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                                    <td>
+                                        <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.EventId">View Event</a>
 
-                        </td>
-                        <td>
-                            <a type="button" class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.EventId">Edit</a>
-                       </td>
-                            <td>
-                            <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-                        </td>
-                    </tr>
-                    }
+                                    </td>
+                                    <td>
+                                        <a type="button" class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.EventId">Edit</a>
+                                    </td>
+                                    <td>
+                                        <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
+                                    </td>
+                                </tr>
+                            }
 
-                </tbody>
-            </table>
-            </div>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
