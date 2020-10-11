@@ -5,12 +5,12 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="heading">Details</h2>
 @if (Context.Session.GetString("RoleId") == "1")
 {
     <div class="card">
         <div class="container">
-        <h4>Member</h4>
+        <h4 class="heading">Member</h4>
         <hr />
 
         <dl class="dl-horizontal">
@@ -65,7 +65,7 @@ else if (Context.Session.GetString("RoleId") == "2" || Context.Session.GetString
 {
     <div class="card">
         <div class="container">
-        <h4>Member</h4>
+        <h4 class="heading">Member</h4>
         <hr />
 
         <dl class="dl-horizontal">

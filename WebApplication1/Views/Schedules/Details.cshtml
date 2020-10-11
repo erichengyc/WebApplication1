@@ -4,16 +4,18 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="heading">Details</h2>
 
-<h3>Schedule</h3>
+<h3 class="heading">Schedule</h3>
 
 @if (Model.Members.Count == 0)
 {
-    <h4>You have no members enrolled in this event</h4>
+    <h4 class="heading">You have no members enrolled in this event</h4>
 }
 else
 {
+    <div class="card">
+        <div class="container">
     <table class="pure-table pure-table-horizontal">
         <thead>
             <tr>
@@ -31,5 +33,7 @@ else
             }
         </tbody>
     </table>
+    </div>
+    </div>
 }
 
