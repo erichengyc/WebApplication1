@@ -8,7 +8,8 @@
 @if (Context.Session.GetString("RoleId") == "1")
 {
     <h2 class="heading">All Memberships</h2>
-
+    <div class="card">
+        <div class="container">
     <table class="table">
         <thead>
             <tr>
@@ -67,6 +68,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Biography)
                 </td>
+
+
+           <!--
+                <td>
+                    <a type="button" class="btn btn-info" asp-action="Details" asp-route-id="@item.MemberId">Details</a>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-info" asp-action="Delete" asp-route-id="@item.MemberId">Delete</a>
+                </td>-->
+
+            </tr>
+            <tr>
                 <td>
                     <a type="button" class="btn btn-info" asp-action="Edit" asp-route-id="@item.MemberId">Edit</a>
                 </td>
@@ -80,5 +93,7 @@
             }
         </tbody>
     </table>
+    </div>
+    </div>
 }
 
