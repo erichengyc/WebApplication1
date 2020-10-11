@@ -4,9 +4,11 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="heading">Details</h1>
 
 <div>
+    <div class="card">
+    <div class="container">
     <h4>Role</h4>
     <hr />
     <dl class="row">
@@ -21,4 +23,6 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.RoleId">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
+</div>
 </div>

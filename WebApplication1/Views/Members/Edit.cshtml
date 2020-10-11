@@ -5,9 +5,11 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<h2 class="heading">Edit</h2>
 
-<h4>Member</h4>
+<div class="card">
+    <div class="container">
+<h4 class="heading">Member</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -101,6 +103,8 @@
 
 <div>
     <a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")">Back to account</a>
+</div>
+</div>
 </div>
 
 @section Scripts {
