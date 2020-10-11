@@ -115,38 +115,39 @@ namespace WebApplication1.Controllers
         // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var MemberIdString = HttpContext.Session.GetString("MemberId");
-            var RoleId = HttpContext.Session.GetString("RoleId");
-
-            Int32.TryParse(MemberIdString, out int MemberId);
-
-            //Admins can edit any member
-            if (MemberIdString != null && RoleId == "1")
-            {
-                var member = await _context.Member.FindAsync(id);
-                if (member == null)
-                {
+                if (id == null)
+                { 
                     return NotFound();
                 }
-                return View(member);
-            }
 
-            //Coaches can edit their accounts
+                var MemberIdString = HttpContext.Session.GetString("MemberId");
+                var RoleId = HttpContext.Session.GetString("RoleId");
 
-            else if (MemberIdString != null && RoleId == "2")
-            {
-                var member = await _context.Member.FindAsync(MemberId);
-                if (member == null)
+                Int32.TryParse(MemberIdString, out int MemberId);
+
+                //Admins can edit any member
+                if (MemberIdString != null && RoleId == "1")
                 {
-                    return NotFound();
+                    var member = await _context.Member.FindAsync(id);
+                    if (member == null)
+                    {
+                        return NotFound();
+                    }
+                    return View(member);
                 }
-                return View(member);
-            }
+
+                //Coaches can edit their accounts
+
+                else if (MemberIdString != null && RoleId == "2")
+                {
+                    var member = await _context.Member.FindAsync(id);
+                    if (member == null)
+                    {
+                        return NotFound();
+                    }
+                    return View(member);
+                }
+
 
             return NotFound();
         }

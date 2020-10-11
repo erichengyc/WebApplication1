@@ -20,7 +20,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Schedules
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
             var MemberIdString = HttpContext.Session.GetString("MemberId");
@@ -84,7 +84,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Schedules/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -97,15 +97,14 @@ namespace WebApplication1.Controllers
             Int32.TryParse(RoleIdString, out int RoleId);
 
             // Coaches and members can see details about thier events. Coaches see all members enrolled in their event
-
             if (MemberId != null && RoleId == 1 || RoleId == 2)
             {
                 var schedule = _context.Schedule.FirstOrDefault(s => s.ScheduleId == id);
+
                 // Retrieve the selected event
-
                 var selectedEvent = _context.Event.FirstOrDefault(e => e.EventId == id);
-                // Retrieve all members enrolled in selected even
 
+                // Retrieve all members enrolled in selected event
                 var membersInEvent = from m in _context.Member
                                      join s in _context.Schedule on m.MemberId equals s.MemberId
                                      join e in _context.Event on s.EventId equals e.EventId
@@ -113,7 +112,6 @@ namespace WebApplication1.Controllers
                                      select m;
 
                 // Add retrieve data into the viewmodel
-
                 var eVM2 = new EventSchduleViewModel
                 {
                     Members = membersInEvent.ToList()
