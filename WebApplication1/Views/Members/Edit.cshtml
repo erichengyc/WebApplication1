@@ -7,8 +7,6 @@
 
 <h2 class="heading">Edit</h2>
 
-<div class="card">
-    <div class="container">
 <h4 class="heading">Member</h4>
 <hr />
 <div class="row">
@@ -104,8 +102,7 @@
 <div>
     <a asp-controller="Members" asp-action="Details" asp-route-id="@Context.Session.GetString("MemberId")">Back to account</a>
 </div>
-</div>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
