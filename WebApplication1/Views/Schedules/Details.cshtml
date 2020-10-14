@@ -16,24 +16,26 @@ else
 {
     <div class="card">
         <div class="container">
-    <table class="pure-table pure-table-horizontal">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Members)</th>
+            <table class="pure-table pure-table-horizontal">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Members)</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Members)
-            {
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Members)
+                    {
 
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    </div>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 }
-
+<div class="form-group">
+    <a type="button" class="btn btn-secondary" asp-controller="Schedules" asp-action="Index">Back to List</a>
+</div>

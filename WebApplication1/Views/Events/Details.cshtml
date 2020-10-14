@@ -76,44 +76,53 @@ else if (Context.Session.GetString("RoleId") == "2")
             </dl>
         </div>
     </div>
+    <div>
+        <form asp-action="Details" class="card">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EventId" />
+            <div class="form-group">
+                <a type="button" class="btn btn-secondary" asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
 }
 else if (Context.Session.GetString("RoleId") == "1")
 {
     <div class="card">
         <div class="container">
-<div>
-    <h4 class="heading">Event</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-    </dl>
-    <form asp-action="Details" class="card">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="EventId" />
-        <div class="form-group">
-            <input type="submit" value="Enroll" class="btn btn-primary" />
-            <a type="button" class="btn btn-secondary" asp-action="Index">Back to List</a>
+            <div>
+                <h4 class="heading">Event</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Date)
+                    </dd>
+                </dl>
+                <form asp-action="Details" class="card">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="EventId" />
+                    <div class="form-group">
+                        <input type="submit" value="Enroll" class="btn btn-primary" />
+                        <a type="button" class="btn btn-secondary" asp-controller="Schedules" asp-action="Index">Back to List</a>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
-</div>
-</div>
     </div>
 }
 
