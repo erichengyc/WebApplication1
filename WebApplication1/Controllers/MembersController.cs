@@ -182,7 +182,7 @@ namespace WebApplication1.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return View("Details",member);
             }
             return View(member);
         }
